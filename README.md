@@ -80,7 +80,10 @@ google-chrome --remote-debugging-port=9222 --user-data-dir="$HOME/.config/google
 1. Đăng nhập vào Cursor trong Chrome
 2. Chạy backend server
 3. Automation sẽ attach vào Chrome thật thay vì spawn browser mới
-
+4. Mở UI, nhấn connect CDP sau đó tắt Chrome
+5. Thêm tài khoản mới -> nhấn Open Browser -> Đăng nhập vào Cursor
+6. Sau khi đăng nhập, nhấn Verify Login.
+7. Sau khi chuyển trạng thái Logged nhấn Download CSV (file tải sẽ nằm ở /download [local])
 ### Development
 
 ```bash

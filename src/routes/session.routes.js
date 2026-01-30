@@ -4,6 +4,40 @@ import logger from '../utils/logger.js';
 
 const router = Router();
 
+// Validation constants
+const MAX_BATCH_SIZE = 100;
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+/**
+ * Validates an array of account IDs
+ * @param {any} accountIds - The input to validate
+ * @returns {{ valid: boolean, error: string | null, sanitized: string[] }}
+ */
+function validateAccountIds(accountIds) {
+  if (!accountIds || !Array.isArray(accountIds)) {
+    return { valid: false, error: 'accountIds must be an array', sanitized: [] };
+  }
+
+  if (accountIds.length === 0) {
+    return { valid: false, error: 'accountIds array cannot be empty', sanitized: [] };
+  }
+
+  if (accountIds.length > MAX_BATCH_SIZE) {
+    return { valid: false, error: `Maximum ${MAX_BATCH_SIZE} accounts allowed per batch`, sanitized: [] };
+  }
+
+  // Validate each ID is a string and looks like a valid UUID
+  const invalidIds = accountIds.filter(id => typeof id !== 'string' || !UUID_REGEX.test(id));
+  if (invalidIds.length > 0) {
+    return { valid: false, error: 'Invalid account ID format', sanitized: [] };
+  }
+
+  // Remove duplicates
+  const uniqueIds = [...new Set(accountIds)];
+
+  return { valid: true, error: null, sanitized: uniqueIds };
+}
+
 router.get('/status', async (req, res) => {
   try {
     logger.info('GET /api/sessions/status');
@@ -105,16 +139,22 @@ router.get('/history/:accountId', async (req, res) => {
 router.post('/batch-login', async (req, res) => {
   try {
     const { accountIds } = req.body;
-    logger.info('POST /api/sessions/batch-login', { accountIds });
     
-    if (!accountIds || !Array.isArray(accountIds) || accountIds.length === 0) {
+    // Validate input
+    const validation = validateAccountIds(accountIds);
+    if (!validation.valid) {
       return res.status(400).json({ 
         success: false, 
-        error: { code: 'ERR-SESSION-400', message: 'accountIds array is required' } 
+        error: { code: 'ERR-SESSION-400', message: validation.error } 
       });
     }
     
-    const result = await SessionService.startBatchLogin(accountIds);
+    logger.info('POST /api/sessions/batch-login', { 
+      accountCount: validation.sanitized.length,
+      hasDuplicates: accountIds.length !== validation.sanitized.length
+    });
+    
+    const result = await SessionService.startBatchLogin(validation.sanitized);
     
     if (result.error) {
       return res.status(400).json({ 

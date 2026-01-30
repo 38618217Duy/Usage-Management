@@ -9,7 +9,10 @@
     "dev": "node --watch src/server.js",
     "client": "cd client && npm run dev",
     "client:build": "cd client && npm run build",
-    "install:all": "npm install && cd client && npm install"
+    "install:all": "npm install && cd client && npm install",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "keywords": [
     "cursor",
@@ -29,7 +32,9 @@
     "uuid": "^9.0.0",
     "winston": "^3.11.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
   "engines": {
     "node": ">=18.0.0"
   }

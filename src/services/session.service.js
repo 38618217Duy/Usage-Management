@@ -12,8 +12,13 @@ export const SessionStatus = {
   UNKNOWN: 'UNKNOWN',
 };
 
+// Session status thresholds:
+// - HEALTHY: > 3 days remaining
+// - WARNING: 1-3 days remaining (24-72 hours)
+// - CRITICAL: < 24 hours remaining
+// - EXPIRED: session has expired
 const WARNING_THRESHOLD_DAYS = 3;
-const CRITICAL_THRESHOLD_HOURS = 72;
+const CRITICAL_THRESHOLD_HOURS = 24; // Changed from 72 to avoid overlap with WARNING (3 days = 72h)
 const DEFAULT_SESSION_DAYS = 7;
 
 export class SessionService {
@@ -29,11 +34,13 @@ export class SessionService {
     const hoursRemaining = timeRemainingMs / (1000 * 60 * 60);
     const daysRemaining = hoursRemaining / 24;
 
+    // CRITICAL: less than 24 hours remaining
     if (hoursRemaining < CRITICAL_THRESHOLD_HOURS) {
       return SessionStatus.CRITICAL;
     }
 
-    if (daysRemaining <= WARNING_THRESHOLD_DAYS) {
+    // WARNING: 24 hours to 3 days remaining (use < instead of <= to avoid edge case)
+    if (daysRemaining < WARNING_THRESHOLD_DAYS) {
       return SessionStatus.WARNING;
     }
 
@@ -254,7 +261,7 @@ export class SessionService {
   static async recordLogin(accountId) {
     const account = await AccountModel.findById(accountId);
     if (!account) {
-      return { error: 'ERR-SESSION-001' };
+      return { error: 'ERR-SESSION-001', message: 'Không tìm thấy tài khoản' };
     }
 
     const cookieInfo = await CookieAnalyzerService.getSessionInfo(account.profilePath);

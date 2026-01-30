@@ -12,6 +12,7 @@ export const SessionStatus = {
   UNKNOWN: 'UNKNOWN',
 };
 
+<<<<<<< HEAD
 // Session status thresholds:
 // - HEALTHY: > 3 days remaining
 // - WARNING: 1-3 days remaining (24-72 hours)
@@ -19,6 +20,10 @@ export const SessionStatus = {
 // - EXPIRED: session has expired
 const WARNING_THRESHOLD_DAYS = 3;
 const CRITICAL_THRESHOLD_HOURS = 24; // Changed from 72 to avoid overlap with WARNING (3 days = 72h)
+=======
+const WARNING_THRESHOLD_DAYS = 3;
+const CRITICAL_THRESHOLD_HOURS = 72;
+>>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
 const DEFAULT_SESSION_DAYS = 7;
 
 export class SessionService {
@@ -34,13 +39,20 @@ export class SessionService {
     const hoursRemaining = timeRemainingMs / (1000 * 60 * 60);
     const daysRemaining = hoursRemaining / 24;
 
+<<<<<<< HEAD
     // CRITICAL: less than 24 hours remaining
+=======
+>>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
     if (hoursRemaining < CRITICAL_THRESHOLD_HOURS) {
       return SessionStatus.CRITICAL;
     }
 
+<<<<<<< HEAD
     // WARNING: 24 hours to 3 days remaining (use < instead of <= to avoid edge case)
     if (daysRemaining < WARNING_THRESHOLD_DAYS) {
+=======
+    if (daysRemaining <= WARNING_THRESHOLD_DAYS) {
+>>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
       return SessionStatus.WARNING;
     }
 
@@ -261,7 +273,11 @@ export class SessionService {
   static async recordLogin(accountId) {
     const account = await AccountModel.findById(accountId);
     if (!account) {
+<<<<<<< HEAD
       return { error: 'ERR-SESSION-001', message: 'Không tìm thấy tài khoản' };
+=======
+      return { error: 'ERR-SESSION-001' };
+>>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
     }
 
     const cookieInfo = await CookieAnalyzerService.getSessionInfo(account.profilePath);

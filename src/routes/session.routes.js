@@ -4,6 +4,7 @@ import logger from '../utils/logger.js';
 
 const router = Router();
 
+<<<<<<< HEAD
 // Validation constants
 const MAX_BATCH_SIZE = 100;
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -38,6 +39,8 @@ function validateAccountIds(accountIds) {
   return { valid: true, error: null, sanitized: uniqueIds };
 }
 
+=======
+>>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
 router.get('/status', async (req, res) => {
   try {
     logger.info('GET /api/sessions/status');
@@ -139,6 +142,7 @@ router.get('/history/:accountId', async (req, res) => {
 router.post('/batch-login', async (req, res) => {
   try {
     const { accountIds } = req.body;
+<<<<<<< HEAD
     
     // Validate input
     const validation = validateAccountIds(accountIds);
@@ -155,6 +159,18 @@ router.post('/batch-login', async (req, res) => {
     });
     
     const result = await SessionService.startBatchLogin(validation.sanitized);
+=======
+    logger.info('POST /api/sessions/batch-login', { accountIds });
+    
+    if (!accountIds || !Array.isArray(accountIds) || accountIds.length === 0) {
+      return res.status(400).json({ 
+        success: false, 
+        error: { code: 'ERR-SESSION-400', message: 'accountIds array is required' } 
+      });
+    }
+    
+    const result = await SessionService.startBatchLogin(accountIds);
+>>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
     
     if (result.error) {
       return res.status(400).json({ 

@@ -16,7 +16,11 @@ const statusConfig = {
     icon: '🔴',
   },
   CRITICAL: {
+<<<<<<< HEAD
     label: 'Cần login ngay (<24h)',
+=======
+    label: 'Cần login ngay (<72h)',
+>>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
     color: 'bg-orange-900 border-orange-700',
     textColor: 'text-orange-200',
     badgeColor: 'bg-orange-600',

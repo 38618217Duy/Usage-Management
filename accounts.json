@@ -29,7 +29,23 @@
       "lastSessionCheckAt": "2026-01-30T10:00:23.375Z",
       "averageSessionDays": null,
       "createdAt": "2026-01-30T09:57:35.005Z",
-      "updatedAt": "2026-01-30T10:00:23.376Z"
+      "updatedAt": "2026-01-30T10:26:32.385Z"
+    },
+    {
+      "id": "b696df43-03ba-4fd5-9030-9b3820f35422",
+      "email": "trusty@gmail.com",
+      "profilePath": "profiles\\acc-b696df43-03ba-4fd5-9030-9b3820f35422",
+      "status": "LOGGED_IN",
+      "lastRunAt": "2026-01-30T10:27:10.649Z",
+      "lastError": null,
+      "lastLoginAt": null,
+      "sessionExpiryAt": null,
+      "sessionExpirySource": null,
+      "sessionStatus": "UNKNOWN",
+      "lastSessionCheckAt": null,
+      "averageSessionDays": null,
+      "createdAt": "2026-01-30T10:25:24.751Z",
+      "updatedAt": "2026-01-30T10:27:10.651Z"
     }
   ]
 }

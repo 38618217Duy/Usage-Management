@@ -13,7 +13,7 @@ type TimeRange = '7d' | '14d' | '30d';
 
 export function UsageTrendsChart({ accounts, loading }: UsageTrendsChartProps) {
   const [chartType, setChartType] = useState<ChartType>('line');
-  const [timeRange, setTimeRange] = useState<TimeRange>('14d');
+  const [timeRange, setTimeRange] = useState<TimeRange>('30d');
 
   // Prepare chart data
   const prepareChartData = (): { chartData: any[]; topAccounts: AccountUsageAnalytics[] } => {

@@ -23,7 +23,7 @@ export const config = {
     baseUrl: 'https://cursor.com',
     dashboardUrl: 'https://cursor.com/dashboard',
     usageUrl: 'https://cursor.com/dashboard?tab=usage',
-    loginUrl: 'https://cursor.com/login',
+    loginUrl: 'https://cursor.com',
   },
 
   browser: {

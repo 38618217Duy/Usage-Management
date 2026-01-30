@@ -3,6 +3,7 @@ import path from 'path';
 import csv from 'csv-parser';
 import { createReadStream } from 'fs';
 import config from '../config/index.js';
+import logger from '../utils/logger.js';
 
 class UsageAnalyticsService {
   constructor() {
@@ -21,20 +22,23 @@ class UsageAnalyticsService {
     if (this.cache.has(cacheKey)) {
       const cached = this.cache.get(cacheKey);
       if (Date.now() - cached.timestamp < this.cacheTimeout) {
-        console.log('Returning cached usage overview');
+        logger.info('UsageAnalyticsService.getUsageOverview: Returning cached usage overview');
         return cached.data;
       }
     }
 
     try {
-      console.log('Calculating usage overview from CSV files');
+      logger.info('UsageAnalyticsService.getUsageOverview: Calculating usage overview from CSV files');
       const csvFiles = await this.scanDownloadFolder();
       const allAccountsData = [];
 
       for (const filePath of csvFiles) {
         const email = path.basename(filePath, '.csv');
+        logger.info('UsageAnalyticsService.getUsageOverview: Processing CSV file', { email, filePath });
         const records = await this.parseCsvFile(filePath);
+        logger.info('UsageAnalyticsService.getUsageOverview: Parsed records', { email, recordCount: records.length });
         const analytics = this.calculateAccountMetrics(records, email);
+        logger.info('UsageAnalyticsService.getUsageOverview: Analytics calculated', { email, analytics });
         allAccountsData.push(analytics);
       }
 
@@ -58,10 +62,10 @@ class UsageAnalyticsService {
         timestamp: Date.now()
       });
 
-      console.log(`Usage overview calculated for ${overview.totalAccounts} accounts`);
+      logger.info('UsageAnalyticsService.getUsageOverview: Usage overview calculated', { totalAccounts: overview.totalAccounts });
       return overview;
     } catch (error) {
-      console.error('Error calculating usage overview:', error);
+      logger.error('UsageAnalyticsService.getUsageOverview: Error calculating usage overview', { error: error.message });
       throw error;
     }
   }
@@ -76,13 +80,13 @@ class UsageAnalyticsService {
     if (this.cache.has(cacheKey)) {
       const cached = this.cache.get(cacheKey);
       if (Date.now() - cached.timestamp < this.cacheTimeout) {
-        console.log(`Returning cached analytics for ${email}`);
+        logger.info('UsageAnalyticsService.getAccountAnalytics: Returning cached analytics', { email });
         return cached.data;
       }
     }
 
     try {
-      const filePath = path.join(config.downloadPath, `${email}.csv`);
+      const filePath = path.join(config.paths.download, `${email}.csv`);
       const records = await this.parseCsvFile(filePath);
       const analytics = this.calculateAccountMetrics(records, email);
 
@@ -92,10 +96,10 @@ class UsageAnalyticsService {
         timestamp: Date.now()
       });
 
-      console.log(`Analytics calculated for account: ${email}`);
+      logger.info('UsageAnalyticsService.getAccountAnalytics: Analytics calculated', { email });
       return analytics;
     } catch (error) {
-      console.error(`Error calculating analytics for ${email}:`, error);
+      logger.error('UsageAnalyticsService.getAccountAnalytics: Error calculating analytics', { email, error: error.message });
       throw error;
     }
   }
@@ -104,7 +108,7 @@ class UsageAnalyticsService {
    * Refresh all analytics data (clear cache)
    */
   async refreshAnalytics() {
-    console.log('Refreshing analytics data - clearing cache');
+    logger.info('UsageAnalyticsService.refreshAnalytics: Refreshing analytics data - clearing cache');
     this.cache.clear();
     return await this.getUsageOverview();
   }
@@ -114,15 +118,17 @@ class UsageAnalyticsService {
    */
   async scanDownloadFolder() {
     try {
-      const files = await fs.readdir(config.downloadPath);
+      logger.info('UsageAnalyticsService.scanDownloadFolder: Scanning download folder', { downloadPath: config.paths.download });
+      const files = await fs.readdir(config.paths.download);
+      logger.debug('UsageAnalyticsService.scanDownloadFolder: All files found', { files });
       const csvFiles = files
         .filter(file => file.endsWith('.csv'))
-        .map(file => path.join(config.downloadPath, file));
+        .map(file => path.join(config.paths.download, file));
       
-      console.log(`Found ${csvFiles.length} CSV files in download folder`);
+      logger.info('UsageAnalyticsService.scanDownloadFolder: Found CSV files', { csvFileCount: csvFiles.length, csvFiles });
       return csvFiles;
     } catch (error) {
-      console.error('Error scanning download folder:', error);
+      logger.error('UsageAnalyticsService.scanDownloadFolder: Error scanning download folder', { error: error.message });
       return [];
     }
   }
@@ -159,15 +165,15 @@ class UsageAnalyticsService {
               records.push(record);
             }
           } catch (error) {
-            console.warn(`Error parsing CSV row in ${filePath}:`, error);
+            logger.warn('UsageAnalyticsService.parseCsvFile: Error parsing CSV row', { filePath, error: error.message });
           }
         })
         .on('end', () => {
-          console.log(`Parsed ${records.length} records from ${path.basename(filePath)}`);
+          logger.info('UsageAnalyticsService.parseCsvFile: Parsed records from file', { fileName: path.basename(filePath), recordCount: records.length });
           resolve(records);
         })
         .on('error', (error) => {
-          console.error(`Error reading CSV file ${filePath}:`, error);
+          logger.error('UsageAnalyticsService.parseCsvFile: Error reading CSV file', { filePath, error: error.message });
           reject(error);
         });
     });

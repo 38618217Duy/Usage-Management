@@ -219,9 +219,13 @@ export function Dashboard() {
                   To bypass 403 Forbidden errors, you need to launch Chrome with remote debugging:
                 </p>
                 <code className="block mt-2 p-2 bg-yellow-100 rounded text-xs text-yellow-800">
-                  "C:\Program Files\Google\Chrome\Application\chrome.exe" ^
-  --remote-debugging-port=9222 ^
-  --user-data-dir="C:\chrome-cdp"
+                [Windows]   "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\chrome-cdp"
+                </code>
+                <code className="block mt-2 p-2 bg-yellow-100 rounded text-xs text-yellow-800">
+                [MacOS] /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir="$HOME/Library/Application Support/Google/Chrome"
+                </code>
+                <code className="block mt-2 p-2 bg-yellow-100 rounded text-xs text-yellow-800">
+                [Linux] google-chrome --remote-debugging-port=9222 --user-data-dir="$HOME/.config/google-chrome"
                 </code>
                 <p className="text-sm text-yellow-700 mt-2">
                   Then login to Cursor in Chrome and click "Connect" above.

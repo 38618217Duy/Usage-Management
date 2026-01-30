@@ -39,7 +39,7 @@
 **Acceptance Criteria**:
 
 - [ ] AC-001: Cảnh báo lần 1 khi session còn ≤3 ngày (WARNING)
-- [ ] AC-002: Cảnh báo lần 2 khi session còn <72 giờ (CRITICAL)
+- [ ] AC-002: Cảnh báo lần 2 khi session còn <24 giờ (CRITICAL)
 - [ ] AC-003: Cảnh báo hiển thị trong dashboard với badge/indicator rõ ràng
 
 | Attribute | Value |
@@ -129,7 +129,7 @@ flowchart TD
     H --> I{Time remaining?}
     I -->|> 3 days| J[Status: HEALTHY]
     I -->|1-3 days| K[Status: WARNING]
-    I -->|< 72h| L[Status: CRITICAL]
+    I -->|< 24h| L[Status: CRITICAL]
     I -->|≤ 0| M[Status: EXPIRED]
     J --> N[Update account & history]
     K --> N

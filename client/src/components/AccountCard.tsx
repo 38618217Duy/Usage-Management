@@ -17,6 +17,7 @@ interface AccountCardProps {
   onVerify: (id: string) => Promise<{ success: boolean; error?: { message: string } }>;
   onDownload: (id: string) => Promise<{ success: boolean; error?: { message: string } }>;
   onDelete: (id: string) => Promise<{ success: boolean; error?: { message: string } }>;
+  onDownloadSuccess?: () => void;
 }
 
 type ActionType = 'browser' | 'verify' | 'download' | 'delete' | null;
@@ -26,10 +27,12 @@ export function AccountCard({
   onOpenBrowser, 
   onVerify, 
   onDownload, 
-  onDelete 
+  onDelete,
+  onDownloadSuccess
 }: AccountCardProps) {
   const [loadingAction, setLoadingAction] = useState<ActionType>(null);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   const handleAction = async (
     action: ActionType, 
@@ -47,6 +50,11 @@ export function AccountCard({
       if (action === 'download' && result.data?.filePath) {
         const fileName = result.data.fileName || result.data.filePath.split(/[/\\]/).pop();
         successMessage = `✅ CSV downloaded: ${fileName}`;
+        
+        // Trigger download history refresh
+        if (onDownloadSuccess) {
+          onDownloadSuccess();
+        }
       }
       
       setMessage({ type: 'success', text: successMessage });
@@ -57,6 +65,19 @@ export function AccountCard({
     setLoadingAction(null);
     
     setTimeout(() => setMessage(null), 3000);
+  };
+
+  const handleDeleteClick = () => {
+    setShowDeleteConfirm(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    setShowDeleteConfirm(false);
+    await handleAction('delete', () => onDelete(account.id));
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteConfirm(false);
   };
 
   const formatDate = (dateString: string | null) => {
@@ -74,7 +95,7 @@ export function AccountCard({
           </div>
         </div>
         <button
-          onClick={() => handleAction('delete', () => onDelete(account.id))}
+          onClick={handleDeleteClick}
           disabled={loadingAction !== null}
           className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
           title="Delete account"
@@ -150,6 +171,34 @@ export function AccountCard({
           Download CSV
         </button>
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-sm mx-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Xác nhận xóa</h3>
+            <p className="text-gray-600 mb-4">
+              Bạn có chắc chắn muốn xóa tài khoản <strong>{account.email}</strong>?
+              <br />
+              <span className="text-red-600 text-sm">Hành động này không thể hoàn tác!</span>
+            </p>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={handleDeleteCancel}
+                className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+              >
+                Hủy
+              </button>
+              <button
+                onClick={handleDeleteConfirm}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              >
+                Xóa
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

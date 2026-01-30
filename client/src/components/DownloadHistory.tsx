@@ -1,8 +1,8 @@
-import { FolderOpen, FileText, Calendar, ExternalLink } from 'lucide-react';
+import { FolderOpen, FileText, Calendar, ExternalLink, RefreshCw } from 'lucide-react';
 import { useDownloadHistory } from '../hooks/useUsageAnalytics';
 
 export function DownloadHistory() {
-  const { downloads, loading, error } = useDownloadHistory();
+  const { downloads, loading, error, fetchDownloadHistory } = useDownloadHistory();
 
   const formatFileSize = (bytes: number) => {
     if (bytes === 0) return '0 Bytes';
@@ -57,13 +57,24 @@ export function DownloadHistory() {
           <FileText className="w-5 h-5" />
           Download History
         </h3>
-        <button
-          onClick={openDownloadFolder}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-        >
-          <FolderOpen className="w-4 h-4" />
-          Open Folder
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={fetchDownloadHistory}
+            disabled={loading}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 disabled:opacity-50 transition-colors"
+            title="Refresh download history"
+          >
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+            Refresh
+          </button>
+          <button
+            onClick={openDownloadFolder}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+          >
+            <FolderOpen className="w-4 h-4" />
+            Open Folder
+          </button>
+        </div>
       </div>
 
       {downloads.length === 0 ? (
@@ -111,10 +122,9 @@ export function DownloadHistory() {
 
       <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
         <p className="text-sm text-blue-800">
-          <strong>📁 Download Location:</strong><br />
-          <code className="text-xs bg-blue-100 px-2 py-1 rounded">
-            C:\Users\nguye\OneDrive\Máy tính\Projects\CompanyProject\AgentCursor\download\
-          </code>
+          📁 Files are saved to: <code className="bg-blue-100 px-1 rounded">download/</code>
+          <br />
+          💡 Click "Refresh" to update the list after downloading new files
         </p>
       </div>
     </div>

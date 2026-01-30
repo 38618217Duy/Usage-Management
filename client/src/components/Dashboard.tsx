@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { RefreshCw, Loader2, Users, CheckCircle, AlertTriangle, Download, Wifi, WifiOff, BarChart3, Settings } from 'lucide-react';
+import { RefreshCw, Loader2, Users, CheckCircle, AlertTriangle, Download, Wifi, WifiOff, BarChart3, Settings, Clock } from 'lucide-react';
 import useAccounts from '../hooks/useAccounts';
 import AccountCard from './AccountCard';
 import AddAccountForm from './AddAccountForm';
 import DownloadHistory from './DownloadHistory';
 import { UsageAnalyticsDashboard } from './UsageAnalyticsDashboard';
+import { SessionStatusDashboard } from './session-tracking/SessionStatusDashboard';
 import { api } from '../lib/api';
 import type { RunAllResult } from '../types/account';
 
@@ -26,7 +27,7 @@ export function Dashboard() {
   const [runResult, setRunResult] = useState<RunAllResult | null>(null);
   const [cdpConnected, setCdpConnected] = useState(false);
   const [checkingCdp, setCheckingCdp] = useState(false);
-  const [activeTab, setActiveTab] = useState<'accounts' | 'analytics'>('accounts');
+  const [activeTab, setActiveTab] = useState<'accounts' | 'analytics' | 'sessions'>('accounts');
 
   // Check CDP status on mount
   useEffect(() => {
@@ -170,12 +171,27 @@ export function Dashboard() {
                   Usage Analytics
                 </div>
               </button>
+              <button
+                onClick={() => setActiveTab('sessions')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                  activeTab === 'sessions'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  Session Status
+                </div>
+              </button>
             </nav>
           </div>
         </div>
 
         {/* Tab Content */}
-        {activeTab === 'accounts' ? (
+        {activeTab === 'sessions' ? (
+          <SessionStatusDashboard />
+        ) : activeTab === 'accounts' ? (
           <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">

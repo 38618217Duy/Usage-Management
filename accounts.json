@@ -8,17 +8,28 @@
       "lastRunAt": "2026-01-30T07:19:05.954Z",
       "lastError": null,
       "createdAt": "2026-01-30T06:37:12.333Z",
-      "updatedAt": "2026-01-30T07:19:05.955Z"
+      "updatedAt": "2026-01-30T10:00:23.352Z",
+      "sessionExpiryAt": "2026-02-06T06:37:48.077Z",
+      "sessionExpirySource": "cookie",
+      "sessionStatus": "HEALTHY",
+      "lastSessionCheckAt": "2026-01-30T10:00:23.350Z",
+      "averageSessionDays": null
     },
     {
-      "id": "ef88a959-5388-42d7-8cb2-9351462617f8",
+      "id": "bf16f0d1-7b55-451a-acbe-fb3a2cc5dbba",
       "email": "cursor1@gmail.com",
-      "profilePath": "profiles\\acc-ef88a959-5388-42d7-8cb2-9351462617f8",
+      "profilePath": "profiles\\acc-bf16f0d1-7b55-451a-acbe-fb3a2cc5dbba",
       "status": "LOGGED_IN",
-      "lastRunAt": "2026-01-30T07:44:02.977Z",
+      "lastRunAt": "2026-01-30T09:59:40.649Z",
       "lastError": null,
-      "createdAt": "2026-01-30T06:41:14.868Z",
-      "updatedAt": "2026-01-30T07:44:02.978Z"
+      "lastLoginAt": null,
+      "sessionExpiryAt": "2026-03-31T09:58:33.313Z",
+      "sessionExpirySource": "cookie",
+      "sessionStatus": "HEALTHY",
+      "lastSessionCheckAt": "2026-01-30T10:00:23.375Z",
+      "averageSessionDays": null,
+      "createdAt": "2026-01-30T09:57:35.005Z",
+      "updatedAt": "2026-01-30T10:00:23.376Z"
     }
   ]
 }

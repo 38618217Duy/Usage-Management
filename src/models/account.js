@@ -63,6 +63,12 @@ export class AccountModel {
       status: AccountStatus.NOT_LOGGED_IN,
       lastRunAt: null,
       lastError: null,
+      lastLoginAt: null,
+      sessionExpiryAt: null,
+      sessionExpirySource: null,
+      sessionStatus: 'UNKNOWN',
+      lastSessionCheckAt: null,
+      averageSessionDays: null,
       createdAt: now,
       updatedAt: now,
     };

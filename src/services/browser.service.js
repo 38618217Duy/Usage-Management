@@ -354,7 +354,7 @@ export class BrowserService {
     return false;
   }
 
-  static isBrowserOpen(accountId) {
+  static async isBrowserOpen(accountId) {
     if (!activeBrowsers.has(accountId)) {
       return false;
     }
@@ -381,6 +381,43 @@ export class BrowserService {
           activeBrowsers.delete(accountId);
           return false;
         }
+      }
+
+      // ENHANCED: Check if CDP connection is still active
+      try {
+        const { error: connectError, browser } = await CDPService.connect();
+        if (connectError || !browser) {
+          logger.info('BrowserService.isBrowserOpen: CDP connection lost, cleaning up', { accountId });
+          activeBrowsers.delete(accountId);
+          return false;
+        }
+
+        // Check if browser has any pages/tabs open
+        const { error: contextError, context } = await CDPService.getDefaultContext();
+        if (contextError || !context) {
+          logger.info('BrowserService.isBrowserOpen: No browser context found, cleaning up', { accountId });
+          activeBrowsers.delete(accountId);
+          return false;
+        }
+
+        const pages = context.pages();
+        if (pages.length === 0) {
+          logger.info('BrowserService.isBrowserOpen: No pages open in browser, cleaning up', { accountId });
+          activeBrowsers.delete(accountId);
+          return false;
+        }
+
+        logger.debug('BrowserService.isBrowserOpen: Browser verified active', { 
+          accountId, 
+          pageCount: pages.length 
+        });
+      } catch (err) {
+        logger.info('BrowserService.isBrowserOpen: CDP verification failed, cleaning up', { 
+          accountId, 
+          error: err.message 
+        });
+        activeBrowsers.delete(accountId);
+        return false;
       }
     }
     

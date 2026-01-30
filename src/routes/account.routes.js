@@ -138,6 +138,15 @@ router.post('/:id/open-browser', async (req, res) => {
       });
     }
 
+    // Check if browser is actually open with enhanced verification
+    if (await BrowserService.isBrowserOpen(id)) {
+      logger.warn('POST /api/accounts/:id/open-browser: Browser already open', { id });
+      return res.status(409).json({ 
+        success: false, 
+        error: { code: 'ERR-AUTO-004', message: 'Browser is already open for this account' } 
+      });
+    }
+
     const result = await BrowserService.openLoginBrowser(account);
     
     if (result.error === 'BROWSER_ALREADY_OPEN') {

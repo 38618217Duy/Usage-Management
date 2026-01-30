@@ -1,0 +1,44 @@
+{
+  "accounts": [
+    {
+      "id": "10904220-ed0e-49e7-b85e-588dae5f7091",
+      "email": "trustyapartment@gmail.com",
+      "profilePath": "profiles\\acc-10904220-ed0e-49e7-b85e-588dae5f7091",
+      "status": "LOGGED_IN",
+      "lastRunAt": "2026-01-30T02:13:06.632Z",
+      "lastError": null,
+      "createdAt": "2026-01-29T10:30:54.754Z",
+      "updatedAt": "2026-01-30T02:13:06.634Z"
+    },
+    {
+      "id": "4ee9001b-02ed-4d65-a1b2-d858a16606cc",
+      "email": "nguyenkhanhduy0907@gmail.com",
+      "profilePath": "profiles\\acc-4ee9001b-02ed-4d65-a1b2-d858a16606cc",
+      "status": "LOGGED_IN",
+      "lastRunAt": "2026-01-30T02:13:28.383Z",
+      "lastError": null,
+      "createdAt": "2026-01-29T10:33:16.302Z",
+      "updatedAt": "2026-01-30T02:13:28.384Z"
+    },
+    {
+      "id": "d75a49fb-6230-4ab1-a370-4ce7f88d37d2",
+      "email": "nguyenkhanhduy2911@gmail.com",
+      "profilePath": "profiles\\acc-d75a49fb-6230-4ab1-a370-4ce7f88d37d2",
+      "status": "LOGGED_IN",
+      "lastRunAt": "2026-01-30T02:13:49.884Z",
+      "lastError": null,
+      "createdAt": "2026-01-30T01:38:09.470Z",
+      "updatedAt": "2026-01-30T02:13:49.885Z"
+    },
+    {
+      "id": "e54fc01a-281b-41a6-9d63-228a11b33c0b",
+      "email": "nguyenkhanhduy240405@gmail.com",
+      "profilePath": "profiles\\acc-e54fc01a-281b-41a6-9d63-228a11b33c0b",
+      "status": "LOGGED_IN",
+      "lastRunAt": "2026-01-30T02:14:11.522Z",
+      "lastError": null,
+      "createdAt": "2026-01-30T02:06:44.321Z",
+      "updatedAt": "2026-01-30T02:14:11.523Z"
+    }
+  ]
+}

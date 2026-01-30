@@ -1,0 +1,6 @@
+---
+description: Jai1 Framework Agent - Core rule for skill loading
+alwaysApply: true
+---
+
+@.jai1\rules\jai1.md

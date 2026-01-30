@@ -1,0 +1,4 @@
+---
+---
+
+@.jai1\rule-preset\05-extension.md

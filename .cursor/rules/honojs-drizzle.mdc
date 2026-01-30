@@ -1,0 +1,6 @@
+---
+description: HonoJS + Drizzle ORM stack rules for Edge Computing and Cloudflare Workers
+alwaysApply: true
+---
+
+@.jai1\rules\honojs-drizzle.md

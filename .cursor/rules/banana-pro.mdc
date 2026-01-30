@@ -1,0 +1,7 @@
+---
+description: When a user requests image generation, please use the `generate_image` tool (Nano Banana Pro) following these rules
+globs: model_decision
+alwaysApply: false
+---
+
+@.jai1\rules\banana-pro.md

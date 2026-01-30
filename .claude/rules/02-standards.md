@@ -1,0 +1,4 @@
+---
+---
+
+@.jai1\rule-preset\02-standards.md

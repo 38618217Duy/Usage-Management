@@ -1,0 +1,42 @@
+{
+  "slug": "monorepo-hono-wxt-cf",
+  "name": "Monorepo: Hono RPC + WXT Extension (Cloudflare)",
+  "description": "Rules for Hono RPC API (Cloudflare Workers + D1) with WXT browser extension in pnpm monorepo",
+  "version": "1.1.0",
+  "tags": [
+    "fullstack",
+    "monorepo",
+    "extension",
+    "drizzle",
+    "d1"
+  ],
+  "stack": {
+    "frontend": "WXT + React 19 + Tailwind CSS v4 + shadcn/ui + Zustand",
+    "backend": "Hono RPC + Cloudflare Workers + Drizzle ORM",
+    "mobile": null,
+    "desktop": null,
+    "css": "Tailwind CSS v4",
+    "database": "Drizzle ORM + Cloudflare D1",
+    "language": "TypeScript",
+    "runtime": "Node 22 / Workers"
+  },
+  "files": {
+    "required": [
+      "01-project.md",
+      "02-standards.md",
+      "03-workspace.md",
+      "04-api.md",
+      "05-extension.md"
+    ],
+    "optional": [
+      "06-shared.md"
+    ],
+    "template": [
+      "09-custom.md"
+    ]
+  },
+  "output": {
+    "agentsMd": true,
+    "ideFolder": ".cursor/rules"
+  }
+}

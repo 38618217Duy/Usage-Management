@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Browser profiles (SECURITY - never commit)
+profiles/
+
+# Downloaded CSV files
+download/
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+
+# Client build
+client/dist/
+client/node_modules/

@@ -1,0 +1,737 @@
+{
+  "workflows/README.md": {
+    "filepath": "workflows/README.md",
+    "version": "1.0.0",
+    "checksum": "ee8dfe006940084a",
+    "installedAt": "2026-01-29T07:25:21.597Z",
+    "modified": false
+  },
+  "workflows/commit-it.md": {
+    "filepath": "workflows/commit-it.md",
+    "version": "1.0.0",
+    "checksum": "c96dd2a9ea16a26a",
+    "installedAt": "2026-01-29T07:25:22.307Z",
+    "modified": false
+  },
+  "workflows/create-design-system.md": {
+    "filepath": "workflows/create-design-system.md",
+    "version": "1.0.0",
+    "checksum": "eb2928f8cb49ce33",
+    "installedAt": "2026-01-29T07:25:23.045Z",
+    "modified": false
+  },
+  "workflows/create-prd.md": {
+    "filepath": "workflows/create-prd.md",
+    "version": "1.0.0",
+    "checksum": "fd47812b8f7c4c1c",
+    "installedAt": "2026-01-29T07:25:23.779Z",
+    "modified": false
+  },
+  "workflows/develop-feature.md": {
+    "filepath": "workflows/develop-feature.md",
+    "version": "1.0.0",
+    "checksum": "966d8f6594fd2303",
+    "installedAt": "2026-01-29T07:25:24.478Z",
+    "modified": false
+  },
+  "workflows/generate-ide-rules.md": {
+    "filepath": "workflows/generate-ide-rules.md",
+    "version": "1.0.0",
+    "checksum": "e4af43b2a34a33b3",
+    "installedAt": "2026-01-29T07:25:25.175Z",
+    "modified": false
+  },
+  "workflows/improve-jai1-framework.md": {
+    "filepath": "workflows/improve-jai1-framework.md",
+    "version": "1.0.0",
+    "checksum": "a75bbdf6f30def89",
+    "installedAt": "2026-01-29T07:25:25.891Z",
+    "modified": false
+  },
+  "workflows/investigate-codebase-health.md": {
+    "filepath": "workflows/investigate-codebase-health.md",
+    "version": "1.0.0",
+    "checksum": "c49221202bc3cb43",
+    "installedAt": "2026-01-29T07:25:26.609Z",
+    "modified": false
+  },
+  "workflows/prd-to-features.md": {
+    "filepath": "workflows/prd-to-features.md",
+    "version": "1.0.0",
+    "checksum": "ed69b9b8045cd6be",
+    "installedAt": "2026-01-29T07:25:27.331Z",
+    "modified": false
+  },
+  "workflows/redesign-from-website-url.md": {
+    "filepath": "workflows/redesign-from-website-url.md",
+    "version": "1.0.0",
+    "checksum": "c715e6706cd9626f",
+    "installedAt": "2026-01-29T07:25:28.054Z",
+    "modified": false
+  },
+  "workflows/sync-rules-to-ides.md": {
+    "filepath": "workflows/sync-rules-to-ides.md",
+    "version": "1.0.0",
+    "checksum": "0d631a0c70859d54",
+    "installedAt": "2026-01-29T07:25:28.769Z",
+    "modified": false
+  },
+  "rules/honojs-drizzle.md": {
+    "filepath": "rules/honojs-drizzle.md",
+    "version": "1.0.0",
+    "checksum": "e0a6f85fe6e63bda",
+    "installedAt": "2026-01-29T07:25:29.476Z",
+    "modified": false
+  },
+  "rules/jai1.md": {
+    "filepath": "rules/jai1.md",
+    "version": "1.0.0",
+    "checksum": "f261ebccf2b6ad96",
+    "installedAt": "2026-01-29T07:25:30.194Z",
+    "modified": false
+  },
+  "agents/architect-review.md": {
+    "filepath": "agents/architect-review.md",
+    "version": "1.0.0",
+    "checksum": "719c554e0336b42b",
+    "installedAt": "2026-01-29T07:25:30.941Z",
+    "modified": false
+  },
+  "agents/backend-architect.md": {
+    "filepath": "agents/backend-architect.md",
+    "version": "1.0.0",
+    "checksum": "a2e29982266e24d5",
+    "installedAt": "2026-01-29T07:25:31.738Z",
+    "modified": false
+  },
+  "agents/jvit-architect.md": {
+    "filepath": "agents/jvit-architect.md",
+    "version": "1.0.0",
+    "checksum": "e52967bfe9971837",
+    "installedAt": "2026-01-29T07:25:32.455Z",
+    "modified": false
+  },
+  "templates/codebase-health/01-project-overview.template.md": {
+    "filepath": "templates/codebase-health/01-project-overview.template.md",
+    "version": "1.0.0",
+    "checksum": "e042bc621ec99062",
+    "installedAt": "2026-01-29T07:25:33.163Z",
+    "modified": false
+  },
+  "templates/codebase-health/02-architecture-analysis.template.md": {
+    "filepath": "templates/codebase-health/02-architecture-analysis.template.md",
+    "version": "1.0.0",
+    "checksum": "aa8f5f960d398cd8",
+    "installedAt": "2026-01-29T07:25:33.882Z",
+    "modified": false
+  },
+  "templates/codebase-health/03-code-quality-report.template.md": {
+    "filepath": "templates/codebase-health/03-code-quality-report.template.md",
+    "version": "1.0.0",
+    "checksum": "e682f57628996108",
+    "installedAt": "2026-01-29T07:25:34.631Z",
+    "modified": false
+  },
+  "templates/codebase-health/04-performance-issues.template.md": {
+    "filepath": "templates/codebase-health/04-performance-issues.template.md",
+    "version": "1.0.0",
+    "checksum": "18e67fbf078005c2",
+    "installedAt": "2026-01-29T07:25:35.280Z",
+    "modified": false
+  },
+  "templates/codebase-health/05-technical-debt.template.md": {
+    "filepath": "templates/codebase-health/05-technical-debt.template.md",
+    "version": "1.0.0",
+    "checksum": "72b829f5cb236f54",
+    "installedAt": "2026-01-29T07:25:35.902Z",
+    "modified": false
+  },
+  "templates/codebase-health/06-ccu-simulation.template.md": {
+    "filepath": "templates/codebase-health/06-ccu-simulation.template.md",
+    "version": "1.0.0",
+    "checksum": "8c914af4a1502769",
+    "installedAt": "2026-01-29T07:25:36.748Z",
+    "modified": false
+  },
+  "templates/codebase-health/07-improvement-proposals.template.md": {
+    "filepath": "templates/codebase-health/07-improvement-proposals.template.md",
+    "version": "1.0.0",
+    "checksum": "36e983abc0938021",
+    "installedAt": "2026-01-29T07:25:37.403Z",
+    "modified": false
+  },
+  "templates/codebase-health/08-executive-summary.template.md": {
+    "filepath": "templates/codebase-health/08-executive-summary.template.md",
+    "version": "1.0.0",
+    "checksum": "be1262ab883096ec",
+    "installedAt": "2026-01-29T07:25:38.091Z",
+    "modified": false
+  },
+  "templates/feature-docs/FRD-frontend.template.md": {
+    "filepath": "templates/feature-docs/FRD-frontend.template.md",
+    "version": "1.0.0",
+    "checksum": "cbda6e2633d0b119",
+    "installedAt": "2026-01-29T07:25:38.833Z",
+    "modified": false
+  },
+  "templates/feature-docs/TDD-frontend.template.md": {
+    "filepath": "templates/feature-docs/TDD-frontend.template.md",
+    "version": "1.0.0",
+    "checksum": "9860cdf8233802f8",
+    "installedAt": "2026-01-29T07:25:39.515Z",
+    "modified": false
+  },
+  "templates/feature-docs/test-scenarios.template.md": {
+    "filepath": "templates/feature-docs/test-scenarios.template.md",
+    "version": "1.0.0",
+    "checksum": "0345531f66e2d03a",
+    "installedAt": "2026-01-29T07:25:40.263Z",
+    "modified": false
+  },
+  "templates/ide-rules/antigravity-rule.template.md": {
+    "filepath": "templates/ide-rules/antigravity-rule.template.md",
+    "version": "1.0.0",
+    "checksum": "9185f5a23752cce5",
+    "installedAt": "2026-01-29T07:25:40.977Z",
+    "modified": false
+  },
+  "templates/ide-rules/cursor-rule.template.md": {
+    "filepath": "templates/ide-rules/cursor-rule.template.md",
+    "version": "1.0.0",
+    "checksum": "cd670a79159b4345",
+    "installedAt": "2026-01-29T07:25:41.666Z",
+    "modified": false
+  },
+  "templates/ide-rules/windsurf-rule.template.md": {
+    "filepath": "templates/ide-rules/windsurf-rule.template.md",
+    "version": "1.0.0",
+    "checksum": "b94a7f0e9d25bef3",
+    "installedAt": "2026-01-29T07:25:43.117Z",
+    "modified": false
+  },
+  "templates/project-docs/PRD.template.md": {
+    "filepath": "templates/project-docs/PRD.template.md",
+    "version": "1.0.0",
+    "checksum": "d5f4093b79e3d40a",
+    "installedAt": "2026-01-29T07:25:43.918Z",
+    "modified": false
+  },
+  "skills/check-domain-availability": {
+    "filepath": "skills/check-domain-availability",
+    "version": "1.0.0",
+    "checksum": "5244ea9da49f6d49",
+    "installedAt": "2026-01-29T07:25:44.581Z",
+    "modified": false
+  },
+  "skills/deploy-to-cloudflare-pages": {
+    "filepath": "skills/deploy-to-cloudflare-pages",
+    "version": "1.0.0",
+    "checksum": "196f0c3c51a9a0e7",
+    "installedAt": "2026-01-29T07:25:45.250Z",
+    "modified": false
+  },
+  "skills/deploy-to-cloudflare-worker": {
+    "filepath": "skills/deploy-to-cloudflare-worker",
+    "version": "1.0.0",
+    "checksum": "76cc756f0adaff69",
+    "installedAt": "2026-01-29T07:25:45.995Z",
+    "modified": false
+  },
+  "skills/deploy-to-netlify": {
+    "filepath": "skills/deploy-to-netlify",
+    "version": "1.0.0",
+    "checksum": "bd1973310f3eecad",
+    "installedAt": "2026-01-29T07:25:46.684Z",
+    "modified": false
+  },
+  "skills/gen-commit-message": {
+    "filepath": "skills/gen-commit-message",
+    "version": "1.0.0",
+    "checksum": "63012f7d63c80f26",
+    "installedAt": "2026-01-29T07:25:47.402Z",
+    "modified": false
+  },
+  "skills/latest-version": {
+    "filepath": "skills/latest-version",
+    "version": "1.0.0",
+    "checksum": "ed21aea88768e966",
+    "installedAt": "2026-01-29T07:25:48.116Z",
+    "modified": false
+  },
+  "skills/mcp-builder": {
+    "filepath": "skills/mcp-builder",
+    "version": "1.0.0",
+    "checksum": "08a3e35e28eda5e2",
+    "installedAt": "2026-01-29T07:25:48.820Z",
+    "modified": false
+  },
+  "skills/now": {
+    "filepath": "skills/now",
+    "version": "1.0.0",
+    "checksum": "d7015995df38f037",
+    "installedAt": "2026-01-29T07:25:49.449Z",
+    "modified": false
+  },
+  "skills/skill-creator": {
+    "filepath": "skills/skill-creator",
+    "version": "1.0.0",
+    "checksum": "600bd140367c0c5d",
+    "installedAt": "2026-01-29T07:25:50.199Z",
+    "modified": false
+  },
+  "skills/web-artifacts-builder": {
+    "filepath": "skills/web-artifacts-builder",
+    "version": "1.0.0",
+    "checksum": "e2a56a46d995c122",
+    "installedAt": "2026-01-29T07:25:51.005Z",
+    "modified": false
+  },
+  "rules/banana-pro.md": {
+    "filepath": "rules/banana-pro.md",
+    "version": "1.0.0",
+    "checksum": "c449ace1ed6e3d9e",
+    "installedAt": "2026-01-29T07:25:51.800Z",
+    "modified": false
+  },
+  "rules/prompt-injection-guard.md": {
+    "filepath": "rules/prompt-injection-guard.md",
+    "version": "1.0.0",
+    "checksum": "1e5d82817433bb1b",
+    "installedAt": "2026-01-29T07:25:52.451Z",
+    "modified": false
+  },
+  "rules/test-strategy.md": {
+    "filepath": "rules/test-strategy.md",
+    "version": "1.0.0",
+    "checksum": "7a9fc80affdc3e83",
+    "installedAt": "2026-01-29T07:25:53.135Z",
+    "modified": false
+  },
+  "workflows/develop-feature-from-conversation.md": {
+    "filepath": "workflows/develop-feature-from-conversation.md",
+    "version": "1.0.0",
+    "checksum": "bd4e7365dac8f277",
+    "installedAt": "2026-01-29T07:25:53.848Z",
+    "modified": false
+  },
+  "workflows/fix-bug.md": {
+    "filepath": "workflows/fix-bug.md",
+    "version": "1.0.0",
+    "checksum": "24cf32f0f6d638eb",
+    "installedAt": "2026-01-29T07:25:54.474Z",
+    "modified": false
+  },
+  "workflows/gen-all-features-doc.md": {
+    "filepath": "workflows/gen-all-features-doc.md",
+    "version": "1.0.0",
+    "checksum": "0695cc1ed97b79af",
+    "installedAt": "2026-01-29T07:25:55.181Z",
+    "modified": false
+  },
+  "workflows/gen-feature-doc.md": {
+    "filepath": "workflows/gen-feature-doc.md",
+    "version": "1.0.0",
+    "checksum": "ea3d044d7ea46ee8",
+    "installedAt": "2026-01-29T07:25:55.900Z",
+    "modified": false
+  },
+  "workflows/gen-project-overview.md": {
+    "filepath": "workflows/gen-project-overview.md",
+    "version": "1.0.0",
+    "checksum": "d984954f0438a22f",
+    "installedAt": "2026-01-29T07:25:56.615Z",
+    "modified": false
+  },
+  "workflows/plan-from-conversation.md": {
+    "filepath": "workflows/plan-from-conversation.md",
+    "version": "1.0.0",
+    "checksum": "50713c4bd46c6d3c",
+    "installedAt": "2026-01-29T07:25:57.228Z",
+    "modified": false
+  },
+  "workflows/plan.md": {
+    "filepath": "workflows/plan.md",
+    "version": "1.0.0",
+    "checksum": "39d5838130a3a952",
+    "installedAt": "2026-01-29T07:25:57.952Z",
+    "modified": false
+  },
+  "workflows/review-branch.md": {
+    "filepath": "workflows/review-branch.md",
+    "version": "1.0.0",
+    "checksum": "fcf0adcce8422810",
+    "installedAt": "2026-01-29T07:25:58.683Z",
+    "modified": false
+  },
+  "workflows/review-local-changes.md": {
+    "filepath": "workflows/review-local-changes.md",
+    "version": "1.0.0",
+    "checksum": "af16e3f3775dbfe1",
+    "installedAt": "2026-01-29T07:25:59.380Z",
+    "modified": false
+  },
+  "templates/feature-docs/FRD-backend.template.md": {
+    "filepath": "templates/feature-docs/FRD-backend.template.md",
+    "version": "1.0.0",
+    "checksum": "e8975e83998b2ab2",
+    "installedAt": "2026-01-29T07:26:00.199Z",
+    "modified": false
+  },
+  "templates/feature-docs/FRD-fullstack.template.md": {
+    "filepath": "templates/feature-docs/FRD-fullstack.template.md",
+    "version": "1.0.0",
+    "checksum": "bfba6c36ea8a2d68",
+    "installedAt": "2026-01-29T07:26:00.914Z",
+    "modified": false
+  },
+  "templates/feature-docs/TDD-backend.template.md": {
+    "filepath": "templates/feature-docs/TDD-backend.template.md",
+    "version": "1.0.0",
+    "checksum": "b469015be5f92c26",
+    "installedAt": "2026-01-29T07:26:01.632Z",
+    "modified": false
+  },
+  "templates/feature-docs/TDD-fullstack.template.md": {
+    "filepath": "templates/feature-docs/TDD-fullstack.template.md",
+    "version": "1.0.0",
+    "checksum": "4345f455fbb47977",
+    "installedAt": "2026-01-29T07:26:02.451Z",
+    "modified": false
+  },
+  "skills/bug-hunter": {
+    "filepath": "skills/bug-hunter",
+    "version": "1.0.0",
+    "checksum": "9f2d104c9ec46894",
+    "installedAt": "2026-01-29T07:26:03.094Z",
+    "modified": false
+  },
+  "skills/code-quality-reviewer": {
+    "filepath": "skills/code-quality-reviewer",
+    "version": "1.0.0",
+    "checksum": "a60fedc1ba767f97",
+    "installedAt": "2026-01-29T07:26:03.792Z",
+    "modified": false
+  },
+  "skills/contracts-reviewer": {
+    "filepath": "skills/contracts-reviewer",
+    "version": "1.0.0",
+    "checksum": "ce1bfaf1f02908bf",
+    "installedAt": "2026-01-29T07:26:04.509Z",
+    "modified": false
+  },
+  "skills/custom-github-gemini-code-assist": {
+    "filepath": "skills/custom-github-gemini-code-assist",
+    "version": "1.0.0",
+    "checksum": "921d5ddcb5a161f8",
+    "installedAt": "2026-01-29T07:26:05.252Z",
+    "modified": false
+  },
+  "skills/frontend-design": {
+    "filepath": "skills/frontend-design",
+    "version": "1.0.0",
+    "checksum": "61406ddbecf39961",
+    "installedAt": "2026-01-29T07:26:05.945Z",
+    "modified": false
+  },
+  "skills/gen-prompt": {
+    "filepath": "skills/gen-prompt",
+    "version": "1.0.0",
+    "checksum": "facba5fc377d12e9",
+    "installedAt": "2026-01-29T07:26:06.662Z",
+    "modified": false
+  },
+  "skills/historical-context-reviewer": {
+    "filepath": "skills/historical-context-reviewer",
+    "version": "1.0.0",
+    "checksum": "87b0126837ba6fb0",
+    "installedAt": "2026-01-29T07:26:07.376Z",
+    "modified": false
+  },
+  "skills/mcp-honojs-mastra": {
+    "filepath": "skills/mcp-honojs-mastra",
+    "version": "1.0.0",
+    "checksum": "f18321dd2abf5136",
+    "installedAt": "2026-01-29T07:26:08.101Z",
+    "modified": false
+  },
+  "skills/security-auditor": {
+    "filepath": "skills/security-auditor",
+    "version": "1.0.0",
+    "checksum": "f78cb8eafbcad092",
+    "installedAt": "2026-01-29T07:26:08.806Z",
+    "modified": false
+  },
+  "skills/supabase": {
+    "filepath": "skills/supabase",
+    "version": "1.0.0",
+    "checksum": "6248ad532693c451",
+    "installedAt": "2026-01-29T07:26:09.526Z",
+    "modified": false
+  },
+  "skills/test-coverage-reviewer": {
+    "filepath": "skills/test-coverage-reviewer",
+    "version": "1.0.0",
+    "checksum": "9de39d98a003eacb",
+    "installedAt": "2026-01-29T07:26:10.239Z",
+    "modified": false
+  },
+  "rule-presets/laravel-api": {
+    "filepath": "rule-presets/laravel-api",
+    "version": "2.0.0",
+    "checksum": "ef3bcb02ab55f2e0",
+    "installedAt": "2026-01-29T07:26:10.965Z",
+    "modified": false
+  },
+  "rule-presets/nestjs-backend": {
+    "filepath": "rule-presets/nestjs-backend",
+    "version": "2.0.0",
+    "checksum": "77c3f7c213463ddd",
+    "installedAt": "2026-01-29T07:26:11.687Z",
+    "modified": false
+  },
+  "rule-presets/nuxtjs-app": {
+    "filepath": "rule-presets/nuxtjs-app",
+    "version": "3.0.0",
+    "checksum": "1b8309d1a755af82",
+    "installedAt": "2026-01-29T07:26:12.397Z",
+    "modified": false
+  },
+  "skills/gen-tech-visual": {
+    "filepath": "skills/gen-tech-visual",
+    "version": "1.0.0",
+    "checksum": "480b55fc29ed312a",
+    "installedAt": "2026-01-29T07:26:13.101Z",
+    "modified": false
+  },
+  "context/jv-it-context.md": {
+    "filepath": "context/jv-it-context.md",
+    "version": "1.0.0",
+    "checksum": "1e906e2ab110bb42",
+    "installedAt": "2026-01-29T07:26:13.831Z",
+    "modified": false
+  },
+  "workflows/analyze-impact.md": {
+    "filepath": "workflows/analyze-impact.md",
+    "version": "1.0.0",
+    "checksum": "7b3d28e67f629861",
+    "installedAt": "2026-01-29T07:26:14.538Z",
+    "modified": false
+  },
+  "templates/feature-docs/TEST-feature.template.md": {
+    "filepath": "templates/feature-docs/TEST-feature.template.md",
+    "version": "1.0.0",
+    "checksum": "49e0fa496de4053f",
+    "installedAt": "2026-01-29T07:26:15.251Z",
+    "modified": false
+  },
+  "skills/impact-analyzer": {
+    "filepath": "skills/impact-analyzer",
+    "version": "1.0.0",
+    "checksum": "00e4f6b1ace3f3e8",
+    "installedAt": "2026-01-29T07:26:15.981Z",
+    "modified": false
+  },
+  "workflows/feedback.md": {
+    "filepath": "workflows/feedback.md",
+    "version": "1.0.0",
+    "checksum": "46a257eaf90c97cb",
+    "installedAt": "2026-01-29T07:26:16.693Z",
+    "modified": false
+  },
+  "skills/debug-cloudflare-worker": {
+    "filepath": "skills/debug-cloudflare-worker",
+    "version": "1.0.0",
+    "checksum": "11d7f45ee699dbbd",
+    "installedAt": "2026-01-29T07:26:17.406Z",
+    "modified": false
+  },
+  "rule-presets/docs-docusaurus": {
+    "filepath": "rule-presets/docs-docusaurus",
+    "version": "1.0.0",
+    "checksum": "408b70772fe37daf",
+    "installedAt": "2026-01-29T07:26:18.046Z",
+    "modified": false
+  },
+  "rule-presets/docs-vitepress": {
+    "filepath": "rule-presets/docs-vitepress",
+    "version": "1.0.0",
+    "checksum": "de0d5d6246c6eea8",
+    "installedAt": "2026-01-29T07:26:18.755Z",
+    "modified": false
+  },
+  "rule-presets/expressjs-api": {
+    "filepath": "rule-presets/expressjs-api",
+    "version": "1.0.0",
+    "checksum": "51b82228d8abf2b0",
+    "installedAt": "2026-01-29T07:26:19.482Z",
+    "modified": false
+  },
+  "workflows/generate-rules-preset.md": {
+    "filepath": "workflows/generate-rules-preset.md",
+    "version": "1.0.0",
+    "checksum": "03dcf33f1a1f3ab4",
+    "installedAt": "2026-01-29T07:26:20.168Z",
+    "modified": false
+  },
+  "workflows/laravel-builder.md": {
+    "filepath": "workflows/laravel-builder.md",
+    "version": "1.0.0",
+    "checksum": "f5fa6857235b9ad8",
+    "installedAt": "2026-01-29T07:26:20.898Z",
+    "modified": false
+  },
+  "rule-presets/discord-bot-sapphire": {
+    "filepath": "rule-presets/discord-bot-sapphire",
+    "version": "1.0.0",
+    "checksum": "61eedd7ca4418afc",
+    "installedAt": "2026-01-29T07:26:21.660Z",
+    "modified": false
+  },
+  "rule-presets/next-spa-zustand": {
+    "filepath": "rule-presets/next-spa-zustand",
+    "version": "1.0.0",
+    "checksum": "1d926fd69aba4353",
+    "installedAt": "2026-01-29T07:26:22.371Z",
+    "modified": false
+  },
+  "rule-presets/react-spa-zustand": {
+    "filepath": "rule-presets/react-spa-zustand",
+    "version": "1.0.0",
+    "checksum": "2fb7b4ac9a8bbde6",
+    "installedAt": "2026-01-29T07:26:23.072Z",
+    "modified": false
+  },
+  "rule-presets/vue-spa": {
+    "filepath": "rule-presets/vue-spa",
+    "version": "1.0.0",
+    "checksum": "25125f9a80c3e6c2",
+    "installedAt": "2026-01-29T07:26:23.879Z",
+    "modified": false
+  },
+  "rule-presets/nextjs-tw4-shadcn": {
+    "filepath": "rule-presets/nextjs-tw4-shadcn",
+    "version": "2.0.0",
+    "checksum": "fd81822ba7aad2b0",
+    "installedAt": "2026-01-29T07:26:24.618Z",
+    "modified": false
+  },
+  "workflows/mermaid-fix.md": {
+    "filepath": "workflows/mermaid-fix.md",
+    "version": "1.0.0",
+    "checksum": "c0ce06332150db79",
+    "installedAt": "2026-01-29T07:26:25.288Z",
+    "modified": false
+  },
+  "workflows/translate.md": {
+    "filepath": "workflows/translate.md",
+    "version": "1.0.0",
+    "checksum": "4085a9fb4e945736",
+    "installedAt": "2026-01-29T07:26:26.005Z",
+    "modified": false
+  },
+  "workflows/convert-pptx.md": {
+    "filepath": "workflows/convert-pptx.md",
+    "version": "1.0.0",
+    "checksum": "b855fa66a670891b",
+    "installedAt": "2026-01-29T07:26:26.634Z",
+    "modified": false
+  },
+  "skills/pptx-to-markdown": {
+    "filepath": "skills/pptx-to-markdown",
+    "version": "1.0.0",
+    "checksum": "8bca7de304e24ebc",
+    "installedAt": "2026-01-29T07:26:27.266Z",
+    "modified": false
+  },
+  "workflows/mysql-performance-improvement.md": {
+    "filepath": "workflows/mysql-performance-improvement.md",
+    "version": "1.0.0",
+    "checksum": "bb88be4c954de5f3",
+    "installedAt": "2026-01-29T07:26:27.951Z",
+    "modified": false
+  },
+  "workflows/mysql-troubleshooting.md": {
+    "filepath": "workflows/mysql-troubleshooting.md",
+    "version": "1.0.0",
+    "checksum": "9fe72ebff149e8e2",
+    "installedAt": "2026-01-29T07:26:28.677Z",
+    "modified": false
+  },
+  "skills/mysql-troubleshooting": {
+    "filepath": "skills/mysql-troubleshooting",
+    "version": "1.0.0",
+    "checksum": "66172cd23b150e0a",
+    "installedAt": "2026-01-29T07:26:29.401Z",
+    "modified": false
+  },
+  "rule-presets/monorepo-base": {
+    "filepath": "rule-presets/monorepo-base",
+    "version": "1.0.0",
+    "checksum": "3303c452dfb85937",
+    "installedAt": "2026-01-29T07:26:30.132Z",
+    "modified": false
+  },
+  "rule-presets/monorepo-nestjs-react": {
+    "filepath": "rule-presets/monorepo-nestjs-react",
+    "version": "1.0.0",
+    "checksum": "270ada1d4ce6c782",
+    "installedAt": "2026-01-29T07:26:30.859Z",
+    "modified": false
+  },
+  "rule-presets/monorepo-hono-wxt-cf": {
+    "filepath": "rule-presets/monorepo-hono-wxt-cf",
+    "version": "1.1.0",
+    "checksum": "3eb9c046695b7646",
+    "installedAt": "2026-01-29T07:26:31.557Z",
+    "modified": false
+  },
+  "workflows/react-optimize.md": {
+    "filepath": "workflows/react-optimize.md",
+    "version": "1.0.0",
+    "checksum": "371ac728fc2a8b1a",
+    "installedAt": "2026-01-29T07:26:32.229Z",
+    "modified": false
+  },
+  "workflows/ui-audit.md": {
+    "filepath": "workflows/ui-audit.md",
+    "version": "1.0.0",
+    "checksum": "ae708dc3c94d4a46",
+    "installedAt": "2026-01-29T07:26:32.891Z",
+    "modified": false
+  },
+  "workflows/vercel-deploy.md": {
+    "filepath": "workflows/vercel-deploy.md",
+    "version": "1.0.0",
+    "checksum": "90aca1a4458bad33",
+    "installedAt": "2026-01-29T07:26:33.615Z",
+    "modified": false
+  },
+  "skills/react-best-practices": {
+    "filepath": "skills/react-best-practices",
+    "version": "1.0.0",
+    "checksum": "d3b7897479be5e0f",
+    "installedAt": "2026-01-29T07:26:34.431Z",
+    "modified": false
+  },
+  "skills/vercel-deploy-claimable": {
+    "filepath": "skills/vercel-deploy-claimable",
+    "version": "1.0.0",
+    "checksum": "f75a71069588a395",
+    "installedAt": "2026-01-29T07:26:35.082Z",
+    "modified": false
+  },
+  "skills/web-design-guidelines": {
+    "filepath": "skills/web-design-guidelines",
+    "version": "1.0.0",
+    "checksum": "e2cd6118fde831dc",
+    "installedAt": "2026-01-29T07:26:35.733Z",
+    "modified": false
+  },
+  "skills/rule-preset-creator": {
+    "filepath": "skills/rule-preset-creator",
+    "version": "1.0.0",
+    "checksum": "a2d3b779b42fc41f",
+    "installedAt": "2026-01-29T07:26:36.490Z",
+    "modified": false
+  }
+}

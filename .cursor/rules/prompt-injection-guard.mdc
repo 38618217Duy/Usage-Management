@@ -1,0 +1,6 @@
+---
+description: External Context Injection Defense - Security rules for AI agents
+alwaysApply: true
+---
+
+@.jai1\rules\prompt-injection-guard.md

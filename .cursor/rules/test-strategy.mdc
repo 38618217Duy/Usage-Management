@@ -1,0 +1,6 @@
+---
+description: Test strategy rules - mandatory test process for implementing or modifying test code
+alwaysApply: true
+---
+
+@.jai1\rules\test-strategy.md

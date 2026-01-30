@@ -1,0 +1,69 @@
+# Gemini Code Assist Configuration
+# Place this file at: .gemini/config.yaml
+
+# Enable fun features such as a poem in the initial pull request summary
+have_fun: false
+
+# Persistent memory configuration
+memory_config:
+  # Disable persistent memory for this repository
+  disabled: false
+
+# Code review configuration
+# NOTE: Optimized for teams without dedicated reviewers
+# Focus on security, critical issues, and high-impact problems
+code_review:
+  # Disable Gemini from acting on pull requests
+  disable: false
+  
+  # Minimum severity of review comments
+  # Using HIGH to focus on critical issues only
+  # Options: LOW, MEDIUM, HIGH, CRITICAL
+  comment_severity_threshold: HIGH
+  
+  # Maximum number of review comments
+  # Limit to avoid overwhelming developers
+  max_review_comments: 15
+  
+  # Configuration for pull request opened events
+  pull_request_opened:
+    # Post a help message on pull request open
+    help: false
+    # Post a pull request summary on open
+    summary: true
+    # Post a code review on pull request open
+    code_review: true
+    # Review draft PRs - disabled to save quota
+    include_drafts: false
+
+# Glob patterns for files and directories to ignore
+# Ignore generated files, dependencies, and non-critical files
+ignore_patterns:
+  # Dependencies
+  - "node_modules/**"
+  - "vendor/**"
+  
+  # Build outputs
+  - "dist/**"
+  - "build/**"
+  - ".next/**"
+  - ".nuxt/**"
+  - "public/build/**"
+  
+  # Generated files
+  - "*.min.js"
+  - "*.min.css"
+  - "*.g.dart"
+  - "*.freezed.dart"
+  - "*.generated.*"
+  
+  # Lock files
+  - "*.lock"
+  - "pnpm-lock.yaml"
+  - "pubspec.lock"
+  
+  # Cache and storage
+  - "storage/**"
+  - "bootstrap/cache/**"
+  - ".dart_tool/**"
+  - "coverage/**"

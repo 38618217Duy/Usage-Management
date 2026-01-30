@@ -21,6 +21,9 @@ export class AutomationService {
       };
     }
 
+    // Cleanup dead browsers first
+    BrowserService.cleanupDeadBrowsers();
+    
     if (BrowserService.isBrowserOpen(id)) {
       logger.warn('AutomationService.downloadCSV: Browser is currently open', { id });
       return { 

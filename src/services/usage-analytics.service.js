@@ -33,8 +33,11 @@ class UsageAnalyticsService {
 
       for (const filePath of csvFiles) {
         const email = path.basename(filePath, '.csv');
+        console.log(`Processing CSV file for ${email}:`, filePath);
         const records = await this.parseCsvFile(filePath);
+        console.log(`Parsed ${records.length} records for ${email}`);
         const analytics = this.calculateAccountMetrics(records, email);
+        console.log(`Analytics for ${email}:`, analytics);
         allAccountsData.push(analytics);
       }
 
@@ -82,7 +85,7 @@ class UsageAnalyticsService {
     }
 
     try {
-      const filePath = path.join(config.downloadPath, `${email}.csv`);
+      const filePath = path.join(config.paths.download, `${email}.csv`);
       const records = await this.parseCsvFile(filePath);
       const analytics = this.calculateAccountMetrics(records, email);
 
@@ -114,12 +117,14 @@ class UsageAnalyticsService {
    */
   async scanDownloadFolder() {
     try {
-      const files = await fs.readdir(config.downloadPath);
+      console.log('Scanning download folder:', config.paths.download);
+      const files = await fs.readdir(config.paths.download);
+      console.log('All files found:', files);
       const csvFiles = files
         .filter(file => file.endsWith('.csv'))
-        .map(file => path.join(config.downloadPath, file));
+        .map(file => path.join(config.paths.download, file));
       
-      console.log(`Found ${csvFiles.length} CSV files in download folder`);
+      console.log(`Found ${csvFiles.length} CSV files in download folder:`, csvFiles);
       return csvFiles;
     } catch (error) {
       console.error('Error scanning download folder:', error);

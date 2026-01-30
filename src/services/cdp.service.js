@@ -5,10 +5,26 @@ import logger from '../utils/logger.js';
 let cdpBrowser = null;
 
 export class CDPService {
-  static async connect() {
-    if (cdpBrowser) {
+  static async connect(forceReconnect = false) {
+    // Force reconnect if requested (e.g., new Chrome instance launched)
+    if (forceReconnect && cdpBrowser) {
+      logger.info('CDPService.connect: Force reconnecting, closing existing connection');
+      try {
+        cdpBrowser = null;
+      } catch (err) {
+        logger.warn('CDPService.connect: Error during force disconnect', { error: err.message });
+      }
+    }
+
+    if (cdpBrowser && cdpBrowser.isConnected()) {
       logger.info('CDPService.connect: Already connected to Chrome');
       return { error: null, browser: cdpBrowser };
+    }
+
+    // Reset if browser exists but disconnected
+    if (cdpBrowser && !cdpBrowser.isConnected()) {
+      logger.info('CDPService.connect: Previous connection lost, reconnecting');
+      cdpBrowser = null;
     }
 
     try {
@@ -31,6 +47,7 @@ export class CDPService {
         error: err.message,
         endpoint: config.cdp.endpoint
       });
+      cdpBrowser = null;
       return { 
         error: err.message, 
         browser: null,

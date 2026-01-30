@@ -142,7 +142,7 @@ router.get('/download-history/validate/:filename', async (req, res) => {
       });
     }
 
-    const filePath = path.join(config.downloadPath, filename);
+    const filePath = path.join(config.paths.download, filename);
     const isValid = await DownloadHistoryService.validateCsvFile(filePath);
     
     res.json({

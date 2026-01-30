@@ -222,6 +222,56 @@ router.post('/:id/verify', async (req, res) => {
   }
 });
 
+router.post('/:id/close-browser', async (req, res) => {
+  const { id } = req.params;
+  logger.info('POST /api/accounts/:id/close-browser: Request received', { id });
+  
+  try {
+    const closed = await BrowserService.closeBrowser(id);
+    
+    if (!closed) {
+      logger.warn('POST /api/accounts/:id/close-browser: No browser to close', { id });
+      return res.status(404).json({ 
+        success: false, 
+        error: { code: 'ERR-AUTO-005', message: 'No browser is open for this account' } 
+      });
+    }
+
+    logger.info('POST /api/accounts/:id/close-browser: Success', { id });
+    res.json({ 
+      success: true, 
+      message: 'Browser closed successfully' 
+    });
+  } catch (err) {
+    logger.error('POST /api/accounts/:id/close-browser: Error', { id, error: err.message });
+    res.status(500).json({ 
+      success: false, 
+      error: { code: 'ERR-SYS-001', message: 'Internal server error' } 
+    });
+  }
+});
+
+router.post('/cleanup-browsers', async (req, res) => {
+  logger.info('POST /api/accounts/cleanup-browsers: Request received');
+  
+  try {
+    const cleanedCount = BrowserService.cleanupDeadBrowsers();
+    
+    logger.info('POST /api/accounts/cleanup-browsers: Success', { cleanedCount });
+    res.json({ 
+      success: true, 
+      message: `Cleaned up ${cleanedCount} dead browser(s)`,
+      data: { cleanedCount }
+    });
+  } catch (err) {
+    logger.error('POST /api/accounts/cleanup-browsers: Error', { error: err.message });
+    res.status(500).json({ 
+      success: false, 
+      error: { code: 'ERR-SYS-001', message: 'Internal server error' } 
+    });
+  }
+});
+
 router.post('/:id/download', async (req, res) => {
   const { id } = req.params;
   logger.info('POST /api/accounts/:id/download: Request received', { id });

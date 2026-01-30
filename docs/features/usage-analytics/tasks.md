@@ -1,8 +1,8 @@
 # Development Tasks: Usage Analytics
 
-> **Status**: IN_PROGRESS | **Mode**: NEW
+> **Status**: COMPLETED | **Mode**: NEW
 > **Created**: 2026-01-30 10:47
-> **Updated**: 2026-01-30 10:47
+> **Updated**: 2026-01-30 14:10
 
 ## Planning Summary
 
@@ -37,8 +37,10 @@
 - [x] src/services/usage-analytics.service.js
 - [x] src/services/download-history.service.js
 - [x] src/routes/usage-analytics.routes.js
-- [x] src/app.js (add routes)
-- [x] client/package.json (add recharts dependency)
+- [x] src/app.js (register routes)
+
+## Phase 3: Frontend
+
 - [x] client/src/components/UsageAnalyticsDashboard.tsx
 - [x] client/src/components/usage-analytics/UsageOverviewCards.tsx
 - [x] client/src/components/usage-analytics/AccountRankingTable.tsx
@@ -46,16 +48,27 @@
 - [x] client/src/components/usage-analytics/UsageTrendsChart.tsx
 - [x] client/src/components/usage-analytics/AccountDetailModal.tsx
 - [x] client/src/hooks/useUsageAnalytics.ts
-- [x] client/src/components/DownloadHistory.tsx (fix mock data)
-- [x] client/src/App.tsx (add dashboard)
+- [x] client/src/components/Dashboard.tsx (add Usage Analytics tab)
 
-## Modified Files
+## Phase 4: Testing
 
-| File | Action | Notes |
-| ---- | ------ | ----- |
+- [x] Manual testing với real CSV data
+- [ ] Unit tests cho UsageAnalyticsService
+- [ ] Integration tests cho API endpoints
 
-## Checkpoint Log
+## Related Features
 
-| Time             | Task                | Status  | Notes     |
-| ---------------- | ------------------- | ------- | --------- |
-| 2026-01-30 10:47 | Initialize tasks.md | Started | Mode: NEW |
+- **CDP Integration**: Cần CDP để download CSV files bypass 403 Forbidden
+  - Xem: `docs/features/cdp-integration/`
+
+## Files Changed
+
+| File                                                | Change Type | Description                   |
+| --------------------------------------------------- | ----------- | ----------------------------- |
+| `src/services/usage-analytics.service.js`           | New         | Analytics calculation service |
+| `src/services/download-history.service.js`          | New         | File scanning service         |
+| `src/routes/usage-analytics.routes.js`              | New         | API routes                    |
+| `client/src/components/UsageAnalyticsDashboard.tsx` | New         | Main dashboard                |
+| `client/src/components/Dashboard.tsx`               | Modified    | Added analytics tab           |
+| `client/src/hooks/useUsageAnalytics.ts`             | New         | Custom hook for analytics     |
+| `client/src/components/DownloadHistory.tsx`         | Modified    | Fixed mock data issue         |

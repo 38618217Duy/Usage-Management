@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { RefreshCw, Loader2, Users, CheckCircle, AlertTriangle, Download, Wifi, WifiOff } from 'lucide-react';
+import { RefreshCw, Loader2, Users, CheckCircle, AlertTriangle, Download, Wifi, WifiOff, BarChart3, Settings } from 'lucide-react';
 import useAccounts from '../hooks/useAccounts';
 import AccountCard from './AccountCard';
 import AddAccountForm from './AddAccountForm';
 import DownloadHistory from './DownloadHistory';
+import { UsageAnalyticsDashboard } from './UsageAnalyticsDashboard';
 import { api } from '../lib/api';
 import type { RunAllResult } from '../types/account';
 
@@ -25,6 +26,7 @@ export function Dashboard() {
   const [runResult, setRunResult] = useState<RunAllResult | null>(null);
   const [cdpConnected, setCdpConnected] = useState(false);
   const [checkingCdp, setCheckingCdp] = useState(false);
+  const [activeTab, setActiveTab] = useState<'accounts' | 'analytics'>('accounts');
 
   // Check CDP status on mount
   useEffect(() => {
@@ -132,7 +134,44 @@ export function Dashboard() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        {/* Tab Navigation */}
+        <div className="mb-8">
+          <div className="border-b border-gray-200">
+            <nav className="-mb-px flex space-x-8">
+              <button
+                onClick={() => setActiveTab('accounts')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                  activeTab === 'accounts'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <Settings className="w-4 h-4" />
+                  Account Management
+                </div>
+              </button>
+              <button
+                onClick={() => setActiveTab('analytics')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                  activeTab === 'analytics'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <BarChart3 className="w-4 h-4" />
+                  Usage Analytics
+                </div>
+              </button>
+            </nav>
+          </div>
+        </div>
+
+        {/* Tab Content */}
+        {activeTab === 'accounts' ? (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-blue-100 rounded-lg">
@@ -269,6 +308,10 @@ export function Dashboard() {
               />
             ))}
           </div>
+        )}
+          </>
+        ) : (
+          <UsageAnalyticsDashboard />
         )}
       </main>
 

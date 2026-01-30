@@ -1,33 +1,8 @@
-import { useState, useEffect } from 'react';
 import { FolderOpen, FileText, Calendar, ExternalLink } from 'lucide-react';
-
-interface DownloadRecord {
-  fileName: string;
-  filePath: string;
-  downloadedAt: string;
-  email: string;
-  size?: number;
-}
+import { useDownloadHistory } from '../hooks/useUsageAnalytics';
 
 export function DownloadHistory() {
-  const [downloads, setDownloads] = useState<DownloadRecord[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Mock data for now - in real app would fetch from API
-    const mockDownloads: DownloadRecord[] = [
-      {
-        fileName: 'trustyapartment@gmail.com.csv',
-        filePath: 'C:\\Users\\nguye\\OneDrive\\Máy tính\\Projects\\CompanyProject\\AgentCursor\\download\\trustyapartment@gmail.com.csv',
-        downloadedAt: '2026-01-29T08:16:22.020Z',
-        email: 'trustyapartment@gmail.com',
-        size: 179979216
-      }
-    ];
-    
-    setDownloads(mockDownloads);
-    setLoading(false);
-  }, []);
+  const { downloads, loading, error } = useDownloadHistory();
 
   const formatFileSize = (bytes: number) => {
     if (bytes === 0) return '0 Bytes';
@@ -55,6 +30,21 @@ export function DownloadHistory() {
             <div className="h-4 bg-gray-200 rounded"></div>
             <div className="h-4 bg-gray-200 rounded w-5/6"></div>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+        <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2 mb-4">
+          <FileText className="w-5 h-5" />
+          Download History
+        </h3>
+        <div className="text-center py-8 text-red-500">
+          <FileText className="w-12 h-12 mx-auto mb-4 text-red-300" />
+          <p>Lỗi khi tải download history: {error}</p>
         </div>
       </div>
     );

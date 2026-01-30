@@ -33,4 +33,5 @@ build/
 # Client build
 client/dist/
 client/node_modules/
+
 accounts.json

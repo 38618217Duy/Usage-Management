@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import accountRoutes from './routes/account.routes.js';
 import automationRoutes from './routes/automation.routes.js';
+import usageAnalyticsRoutes from './routes/usage-analytics.routes.js';
 import logger from './utils/logger.js';
 import config from './config/index.js';
 
@@ -27,6 +28,7 @@ app.use((req, res, next) => {
 
 app.use('/api/accounts', accountRoutes);
 app.use('/api/automation', automationRoutes);
+app.use('/api/usage-analytics', usageAnalyticsRoutes);
 
 app.get('/api/health', (req, res) => {
   logger.debug('Health check');

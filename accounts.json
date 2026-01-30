@@ -5,10 +5,10 @@
       "email": "trustyapartment@gmail.com",
       "profilePath": "profiles\\acc-10904220-ed0e-49e7-b85e-588dae5f7091",
       "status": "LOGGED_IN",
-      "lastRunAt": "2026-01-30T02:13:06.632Z",
+      "lastRunAt": "2026-01-30T04:29:05.169Z",
       "lastError": null,
       "createdAt": "2026-01-29T10:30:54.754Z",
-      "updatedAt": "2026-01-30T02:13:06.634Z"
+      "updatedAt": "2026-01-30T04:29:05.170Z"
     },
     {
       "id": "4ee9001b-02ed-4d65-a1b2-d858a16606cc",
@@ -39,6 +39,26 @@
       "lastError": null,
       "createdAt": "2026-01-30T02:06:44.321Z",
       "updatedAt": "2026-01-30T02:14:11.523Z"
+    },
+    {
+      "id": "3a0fdf02-f29a-40c6-a161-7611d1aa1335",
+      "email": "khanhduy@gmail.com",
+      "profilePath": "profiles\\acc-3a0fdf02-f29a-40c6-a161-7611d1aa1335",
+      "status": "NOT_LOGGED_IN",
+      "lastRunAt": null,
+      "lastError": null,
+      "createdAt": "2026-01-30T04:24:29.077Z",
+      "updatedAt": "2026-01-30T04:24:29.077Z"
+    },
+    {
+      "id": "83cd7665-4b2a-4723-af56-872d0ed21503",
+      "email": "cursor1@gmail.com",
+      "profilePath": "profiles\\acc-83cd7665-4b2a-4723-af56-872d0ed21503",
+      "status": "NOT_LOGGED_IN",
+      "lastRunAt": null,
+      "lastError": null,
+      "createdAt": "2026-01-30T04:29:37.518Z",
+      "updatedAt": "2026-01-30T04:29:37.518Z"
     }
   ]
 }

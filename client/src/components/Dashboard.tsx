@@ -70,6 +70,12 @@ export function Dashboard() {
     setRunningAll(false);
   };
 
+  // Callback để refresh Download History khi có download thành công
+  const handleDownloadSuccess = () => {
+    // Trigger refresh của DownloadHistory component
+    // Sẽ được implement thông qua context hoặc event system
+  };
+
   const loggedInCount = accounts.filter(a => a.status === 'LOGGED_IN').length;
   const expiredCount = accounts.filter(a => a.status === 'SESSION_EXPIRED').length;
   const notLoggedInCount = accounts.filter(a => a.status === 'NOT_LOGGED_IN').length;
@@ -309,6 +315,7 @@ export function Dashboard() {
                 onVerify={verifyLogin}
                 onDownload={downloadCSV}
                 onDelete={deleteAccount}
+                onDownloadSuccess={handleDownloadSuccess}
               />
             ))}
           </div>

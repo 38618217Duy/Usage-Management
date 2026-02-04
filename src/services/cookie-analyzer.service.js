@@ -1,14 +1,10 @@
 import fs from 'fs/promises';
 import path from 'path';
-<<<<<<< HEAD
 import crypto from 'crypto';
-=======
->>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
 import initSqlJs from 'sql.js';
 import config from '../config/index.js';
 import logger from '../utils/logger.js';
 
-<<<<<<< HEAD
 // WebKit epoch starts from 1601-01-01, JavaScript epoch from 1970-01-01
 // Difference in milliseconds: 11644473600000
 const WEBKIT_EPOCH_OFFSET = 11644473600000;
@@ -53,13 +49,6 @@ export class CookieAnalyzerService {
     }
 
     const fullProfilePath = pathValidation.fullPath;
-=======
-const WEBKIT_EPOCH_OFFSET = 11644473600000;
-
-export class CookieAnalyzerService {
-  static async analyzeCookies(profilePath) {
-    const fullProfilePath = path.join(config.paths.root, profilePath);
->>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
     const cookieDbPath = path.join(fullProfilePath, 'Default', 'Cookies');
     const networkCookieDbPath = path.join(fullProfilePath, 'Default', 'Network', 'Cookies');
 
@@ -79,24 +68,16 @@ export class CookieAnalyzerService {
       }
     }
 
-<<<<<<< HEAD
     // Use crypto.randomUUID() to prevent race condition with concurrent requests
     const tempDbPath = path.join(config.paths.root, `temp_cookies_${crypto.randomUUID()}.db`);
     let db = null;
-=======
-    const tempDbPath = path.join(config.paths.root, 'temp_cookies_' + Date.now() + '.db');
->>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
     
     try {
       await fs.copyFile(dbPath, tempDbPath);
       
       const SQL = await initSqlJs();
       const buffer = await fs.readFile(tempDbPath);
-<<<<<<< HEAD
       db = new SQL.Database(buffer);
-=======
-      const db = new SQL.Database(buffer);
->>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
       
       const cursorCookies = db.exec(`
         SELECT name, host_key, expires_utc, creation_utc, last_access_utc
@@ -105,13 +86,7 @@ export class CookieAnalyzerService {
         ORDER BY expires_utc DESC
       `);
 
-<<<<<<< HEAD
       // Cleanup will be handled in finally block
-=======
-      db.close();
-      
-      await fs.unlink(tempDbPath).catch(() => {});
->>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
       
       const results = cursorCookies.length > 0 && cursorCookies[0].values 
         ? cursorCookies[0].values.map(row => ({
@@ -180,20 +155,12 @@ export class CookieAnalyzerService {
         }
       }
 
-<<<<<<< HEAD
       // Log only metadata, not cookie values to prevent sensitive data exposure
       logger.info('CookieAnalyzerService.analyzeCookies: Analysis complete', { 
         profilePath,
         totalCookies: results.length,
         sessionCookiesFound: relevantCookies.filter(c => c.isSessionCookie).length,
         hasExpiry: !!latestExpiry,
-=======
-      logger.info('CookieAnalyzerService.analyzeCookies: Analysis complete', { 
-        profilePath,
-        totalCookies: results.length,
-        relevantCookies: relevantCookies.length,
-        latestExpiry: latestExpiry?.toISOString(),
->>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
       });
 
       return {
@@ -210,7 +177,6 @@ export class CookieAnalyzerService {
         error: err.message 
       });
       
-<<<<<<< HEAD
       return { error: err.message, cookies: [], expiryAt: null };
     } finally {
       // Ensure database is always closed to prevent memory leaks
@@ -225,11 +191,6 @@ export class CookieAnalyzerService {
       }
       // Always cleanup temp file
       await fs.unlink(tempDbPath).catch(() => {});
-=======
-      await fs.unlink(tempDbPath).catch(() => {});
-      
-      return { error: err.message, cookies: [], expiryAt: null };
->>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
     }
   }
 

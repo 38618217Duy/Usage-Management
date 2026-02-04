@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 
-<<<<<<< HEAD
 // Import and re-export shared types from centralized location for backward compatibility
 export type {
   TimeRemaining,
@@ -23,82 +22,6 @@ import type {
 } from '../types/session';
 
 const API_BASE = 'http://localhost:3000/api';
-
-=======
-const API_BASE = 'http://localhost:3000/api';
-
-export interface TimeRemaining {
-  days: number;
-  hours: number;
-  minutes?: number;
-  formatted: string;
-  isExpired?: boolean;
-}
-
-export interface AccountSessionStatus {
-  id: string;
-  email: string;
-  status: string;
-  sessionStatus: 'HEALTHY' | 'WARNING' | 'CRITICAL' | 'EXPIRED' | 'UNKNOWN';
-  sessionExpiryAt: string | null;
-  sessionExpirySource: string | null;
-  timeRemaining: TimeRemaining | null;
-  lastSessionCheckAt: string | null;
-  averageSessionDays: number | null;
-}
-
-export interface SessionSummary {
-  total: number;
-  healthy: number;
-  warning: number;
-  critical: number;
-  expired: number;
-  unknown: number;
-}
-
-export interface SessionStatusResponse {
-  accounts: AccountSessionStatus[];
-  summary: SessionSummary;
-}
-
-export interface SessionGroups {
-  EXPIRED: AccountSessionStatus[];
-  CRITICAL: AccountSessionStatus[];
-  WARNING: AccountSessionStatus[];
-  HEALTHY: AccountSessionStatus[];
-  UNKNOWN: AccountSessionStatus[];
-}
-
-export interface SessionSummaryResponse {
-  groups: SessionGroups;
-  needsAttention: number;
-  lastCheckedAt: string | null;
-}
-
-export interface SessionHistory {
-  id: string;
-  loginAt: string;
-  expiryAt: string;
-  expirySource: string;
-  durationDays: number | null;
-}
-
-export interface SessionStatistics {
-  totalSessions: number;
-  averageDurationDays: number | null;
-  minDurationDays: number | null;
-  maxDurationDays: number | null;
-  predictedNextExpiry: string | null;
-}
-
-export interface SessionHistoryResponse {
-  accountId: string;
-  email: string;
-  history: SessionHistory[];
-  statistics: SessionStatistics;
-}
-
->>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
 export function useSessionStatus() {
   const [data, setData] = useState<SessionStatusResponse | null>(null);
   const [loading, setLoading] = useState(false);

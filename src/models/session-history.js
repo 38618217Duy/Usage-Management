@@ -5,12 +5,9 @@ import config from '../config/index.js';
 import logger from '../utils/logger.js';
 
 const SESSION_HISTORY_FILE = path.join(config.paths.root, 'session-history.json');
-<<<<<<< HEAD
 
 // Maximum number of session history records to keep per account
 // Older records will be automatically removed when this limit is exceeded
-=======
->>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
 const MAX_HISTORY_PER_ACCOUNT = 50;
 
 export class SessionHistoryModel {
@@ -24,7 +21,6 @@ export class SessionHistoryModel {
   }
 
   static async readAll() {
-<<<<<<< HEAD
     try {
       await this.ensureFileExists();
       const data = await fs.readFile(SESSION_HISTORY_FILE, 'utf-8');
@@ -50,16 +46,6 @@ export class SessionHistoryModel {
       });
       throw new Error(`Failed to save session history: ${err.message}`);
     }
-=======
-    await this.ensureFileExists();
-    const data = await fs.readFile(SESSION_HISTORY_FILE, 'utf-8');
-    const parsed = JSON.parse(data);
-    return parsed.history || [];
-  }
-
-  static async writeAll(history) {
-    await fs.writeFile(SESSION_HISTORY_FILE, JSON.stringify({ history }, null, 2));
->>>>>>> e33bf86d37c801511d5e2e71766cfaabfc44e283
   }
 
   static async getByAccountId(accountId) {

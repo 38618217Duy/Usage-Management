@@ -120,6 +120,11 @@ export class AccountModel {
     });
   }
 
+  static async updateEmail(id, newEmail) {
+    logger.info('AccountModel.updateEmail: Updating email', { id, newEmail });
+    return this.update(id, { email: newEmail });
+  }
+
   static async delete(id) {
     const accounts = await this.readAll();
     const account = accounts.find(acc => acc.id === id);

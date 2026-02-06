@@ -6,6 +6,7 @@ import accountRoutes from './routes/account.routes.js';
 import automationRoutes from './routes/automation.routes.js';
 import usageAnalyticsRoutes from './routes/usage-analytics.routes.js';
 import sessionRoutes from './routes/session.routes.js';
+import syncRoutes from './routes/sync.routes.js';
 import logger from './utils/logger.js';
 import config from './config/index.js';
 
@@ -31,6 +32,7 @@ app.use('/api/accounts', accountRoutes);
 app.use('/api/automation', automationRoutes);
 app.use('/api/usage-analytics', usageAnalyticsRoutes);
 app.use('/api/sessions', sessionRoutes);
+app.use('/api/sync', syncRoutes);
 
 app.get('/api/health', (req, res) => {
   logger.debug('Health check');

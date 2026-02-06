@@ -12,7 +12,9 @@
     "install:all": "npm install && cd client && npm install",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
-    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "sync:check": "node scripts/sync-accounts.js --dry-run",
+    "sync:run": "node scripts/sync-accounts.js"
   },
   "keywords": [
     "cursor",

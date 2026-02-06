@@ -1,9 +1,104 @@
 import path from 'path';
 import fs from 'fs/promises';
+import { createReadStream, createWriteStream } from 'fs';
+import { createInterface } from 'readline';
 import config from '../config/index.js';
 import logger from '../utils/logger.js';
 import { AccountModel, AccountStatus } from '../models/account.js';
 import { CDPService } from './cdp.service.js';
+
+/**
+ * Filter CSV file to only include records within the specified date range
+ * @param {string} filePath - Path to the CSV file
+ * @param {Date} startDate - Start date (inclusive)
+ * @param {Date} endDate - End date (exclusive)
+ * @param {string} id - Account ID for logging
+ * @returns {Promise<{ originalCount: number, filteredCount: number }>}
+ */
+async function filterCsvByDateRange(filePath, startDate, endDate, id) {
+  logger.info('filterCsvByDateRange: Starting filter', { 
+    id, 
+    filePath,
+    startDate: startDate.toISOString(),
+    endDate: endDate.toISOString()
+  });
+
+  const tempFilePath = filePath + '.tmp';
+  const lines = [];
+  let headerLine = null;
+  let originalCount = 0;
+  let filteredCount = 0;
+
+  // Read and filter the file
+  const fileStream = createReadStream(filePath);
+  const rl = createInterface({
+    input: fileStream,
+    crlfDelay: Infinity
+  });
+
+  for await (const line of rl) {
+    if (!headerLine) {
+      headerLine = line;
+      lines.push(line);
+      continue;
+    }
+
+    originalCount++;
+    
+    // Parse the date from the first column (format: "2026-01-26T01:34:27.572Z")
+    const match = line.match(/^"([^"]+)"/);
+    if (match) {
+      const dateStr = match[1];
+      const recordDate = new Date(dateStr);
+      
+      // Check if date is within range [startDate, endDate)
+      if (recordDate >= startDate && recordDate < endDate) {
+        lines.push(line);
+        filteredCount++;
+      }
+    }
+  }
+
+  // Write filtered data back to the file
+  await fs.writeFile(filePath, lines.join('\n') + '\n');
+
+  logger.info('filterCsvByDateRange: Filter complete', { 
+    id, 
+    originalCount, 
+    filteredCount,
+    removedCount: originalCount - filteredCount
+  });
+
+  return { originalCount, filteredCount };
+}
+
+/**
+ * Tính toán date range theo tháng: từ ngày 1 tháng trước đến ngày 1 tháng hiện tại
+ * Ví dụ: Hôm nay 4/2/2026 → startDate: 2026-01-01, endDate: 2026-02-01
+ * @returns {{ startDate: Date, endDate: Date, startMonth: string, endMonth: string }}
+ */
+function calculateMonthlyDateRange() {
+  const now = new Date();
+  
+  // End date: ngày 1 của tháng hiện tại
+  const endDate = new Date(now.getFullYear(), now.getMonth(), 1);
+  
+  // Start date: ngày 1 của tháng trước
+  const startDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  
+  // Format month names for logging
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'];
+  
+  return {
+    startDate,
+    endDate,
+    startMonth: monthNames[startDate.getMonth()],
+    endMonth: monthNames[endDate.getMonth()],
+    startYear: startDate.getFullYear(),
+    endYear: endDate.getFullYear(),
+  };
+}
 
 export class AutomationCDPService {
   static async downloadCSV(account) {
@@ -141,28 +236,25 @@ export class AutomationCDPService {
         menuItems: menuItems.slice(0, 10)
       });
 
-      // CHECKPOINT 7: Select 30 days range
-      logger.info('AutomationCDPService.downloadCSV: CHECKPOINT 7 - Selecting 30 days range', { id });
+      // CHECKPOINT 7: Select monthly date range (ngày 1 tháng trước đến ngày 1 tháng hiện tại)
+      logger.info('AutomationCDPService.downloadCSV: CHECKPOINT 7 - Selecting monthly date range', { id });
       
-      const dateSelectors = [
-        'button:has-text("30d")',
-        'button:has-text("30")',
-        'button:has-text("30 days")', 
-        'button:has-text("Last 30")'
-      ];
+      const dateRange = calculateMonthlyDateRange();
+      logger.info('AutomationCDPService.downloadCSV: Calculated date range', { 
+        id, 
+        startDate: dateRange.startDate.toISOString(),
+        endDate: dateRange.endDate.toISOString(),
+        startMonth: dateRange.startMonth,
+        endMonth: dateRange.endMonth
+      });
       
-      for (const selector of dateSelectors) {
-        try {
-          const dateButton = await page.$(selector);
-          if (dateButton) {
-            await dateButton.click();
-            logger.info('AutomationCDPService.downloadCSV: Selected 30 days range', { id, selector });
-            await page.waitForTimeout(3000);
-            break;
-          }
-        } catch (err) {
-          logger.debug('AutomationCDPService.downloadCSV: Date selector not found', { selector });
-        }
+      try {
+        await this.selectCustomDateRange(page, dateRange, id);
+      } catch (err) {
+        logger.warn('AutomationCDPService.downloadCSV: Failed to select custom date range, continuing with default', { 
+          id, 
+          error: err.message 
+        });
       }
 
       // CHECKPOINT 8: Find and click Export CSV button
@@ -250,16 +342,28 @@ export class AutomationCDPService {
       await download.saveAs(filePath);
       logger.info('AutomationCDPService.downloadCSV: File saved', { id, filePath });
 
+      // CHECKPOINT 10: Filter CSV to only include data within the monthly date range
+      logger.info('AutomationCDPService.downloadCSV: CHECKPOINT 10 - Filtering CSV by date range', { id });
+      const filterResult = await filterCsvByDateRange(filePath, dateRange.startDate, dateRange.endDate, id);
+
       await AccountModel.updateLastRun(id, null);
 
-      logger.info('AutomationCDPService.downloadCSV: Download completed successfully', { id, email, filePath });
+      logger.info('AutomationCDPService.downloadCSV: Download completed successfully', { 
+        id, 
+        email, 
+        filePath,
+        originalRecords: filterResult.originalCount,
+        filteredRecords: filterResult.filteredCount
+      });
       
       return { 
         error: null, 
-        message: 'CSV downloaded successfully via CDP',
+        message: 'CSV downloaded and filtered successfully via CDP',
         filePath,
         fileName,
-        downloadedAt: new Date().toISOString()
+        downloadedAt: new Date().toISOString(),
+        originalRecords: filterResult.originalCount,
+        filteredRecords: filterResult.filteredCount
       };
 
     } catch (err) {
@@ -276,6 +380,205 @@ export class AutomationCDPService {
         message: err.message,
         filePath: null 
       };
+    }
+  }
+
+  /**
+   * Chọn custom date range qua calendar picker
+   * @param {Page} page - Playwright page object
+   * @param {Object} dateRange - { startDate, endDate, startMonth, endMonth, startYear, endYear }
+   * @param {string} id - Account ID for logging
+   */
+  static async selectCustomDateRange(page, dateRange, id) {
+    logger.info('AutomationCDPService.selectCustomDateRange: Starting', { 
+      id, 
+      startDate: dateRange.startDate.toISOString().split('T')[0],
+      endDate: dateRange.endDate.toISOString().split('T')[0]
+    });
+
+    // Step 1: Click vào date range button để mở calendar
+    const dateRangeButtonSelectors = [
+      'button:has-text("Jan")', 
+      'button:has-text("Feb")',
+      'button:has-text("Mar")',
+      'button:has-text("Apr")',
+      'button:has-text("May")',
+      'button:has-text("Jun")',
+      'button:has-text("Jul")',
+      'button:has-text("Aug")',
+      'button:has-text("Sep")',
+      'button:has-text("Oct")',
+      'button:has-text("Nov")',
+      'button:has-text("Dec")',
+      '[data-testid="date-range-button"]',
+      'button:has-text(" - ")',
+    ];
+
+    let calendarOpened = false;
+    for (const selector of dateRangeButtonSelectors) {
+      try {
+        const button = await page.$(selector);
+        if (button) {
+          const buttonText = await button.textContent();
+          // Kiểm tra xem button có chứa date range pattern không (e.g., "Jan 01 - Feb 04")
+          if (buttonText && buttonText.includes(' - ')) {
+            await button.click();
+            calendarOpened = true;
+            logger.info('AutomationCDPService.selectCustomDateRange: Opened calendar', { id, buttonText: buttonText.trim() });
+            await page.waitForTimeout(1000);
+            break;
+          }
+        }
+      } catch (err) {
+        // Continue to next selector
+      }
+    }
+
+    if (!calendarOpened) {
+      logger.warn('AutomationCDPService.selectCustomDateRange: Could not find date range button', { id });
+      return;
+    }
+
+    // Step 2: Navigate đến tháng của startDate và chọn ngày 1
+    await this.navigateToMonthAndSelectDay(page, dateRange.startDate, id, 'start');
+    await page.waitForTimeout(500);
+
+    // Step 3: Navigate đến tháng của endDate và chọn ngày 1
+    await this.navigateToMonthAndSelectDay(page, dateRange.endDate, id, 'end');
+    await page.waitForTimeout(500);
+
+    // Step 4: Click Apply button
+    const applySelectors = [
+      'button:has-text("Apply")',
+      'button:has-text("apply")',
+      '[data-testid="apply-date-range"]',
+      'button.apply',
+    ];
+
+    for (const selector of applySelectors) {
+      try {
+        const applyButton = await page.$(selector);
+        if (applyButton) {
+          await applyButton.click();
+          logger.info('AutomationCDPService.selectCustomDateRange: Clicked Apply', { id });
+          await page.waitForTimeout(2000); // Wait for data to reload
+          return;
+        }
+      } catch (err) {
+        // Continue to next selector
+      }
+    }
+
+    logger.warn('AutomationCDPService.selectCustomDateRange: Could not find Apply button', { id });
+  }
+
+  /**
+   * Navigate đến tháng cụ thể và chọn ngày
+   * @param {Page} page - Playwright page object
+   * @param {Date} targetDate - Ngày cần chọn
+   * @param {string} id - Account ID for logging
+   * @param {string} type - 'start' hoặc 'end' để log
+   */
+  static async navigateToMonthAndSelectDay(page, targetDate, id, type) {
+    const targetMonth = targetDate.getMonth();
+    const targetYear = targetDate.getFullYear();
+    const targetDay = targetDate.getDate();
+    
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'];
+    
+    logger.info('AutomationCDPService.navigateToMonthAndSelectDay: Navigating', { 
+      id, 
+      type,
+      targetMonth: monthNames[targetMonth],
+      targetYear,
+      targetDay
+    });
+
+    // Tìm header hiển thị tháng hiện tại của calendar
+    const maxAttempts = 12; // Tối đa 12 lần navigate (1 năm)
+    
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      // Kiểm tra xem đã đúng tháng chưa
+      const calendarHeader = await page.$eval(
+        'text=/January|February|March|April|May|June|July|August|September|October|November|December/',
+        el => el.textContent
+      ).catch(() => null);
+      
+      if (calendarHeader) {
+        const headerText = calendarHeader.trim();
+        const currentMonthName = monthNames[targetMonth];
+        
+        // Kiểm tra xem header có chứa đúng tháng và năm không
+        if (headerText.includes(currentMonthName) && headerText.includes(String(targetYear))) {
+          logger.info('AutomationCDPService.navigateToMonthAndSelectDay: Found correct month', { 
+            id, 
+            type,
+            headerText 
+          });
+          break;
+        }
+        
+        // Cần navigate - kiểm tra xem cần đi tới hay lui
+        // Đơn giản: click nút previous (<) để đi về tháng trước
+        const prevButton = await page.$('button:has-text("<")') || 
+                          await page.$('[aria-label*="previous"]') ||
+                          await page.$('button[aria-label*="Previous"]');
+        
+        if (prevButton) {
+          await prevButton.click();
+          await page.waitForTimeout(300);
+        } else {
+          logger.warn('AutomationCDPService.navigateToMonthAndSelectDay: Could not find navigation button', { id });
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+
+    // Chọn ngày (day = 1)
+    // Tìm cell chứa số 1 trong calendar
+    const daySelectors = [
+      `td:has-text("${targetDay}")`,
+      `button:has-text("${targetDay}")`,
+      `[data-day="${targetDay}"]`,
+      `div:has-text("${targetDay}")`,
+    ];
+
+    // Cần chọn chính xác ngày 1, không phải 10, 11, 12, etc.
+    try {
+      // Tìm tất cả elements có text là số ngày
+      const dayElements = await page.$$('td, button, div[role="gridcell"]');
+      
+      for (const el of dayElements) {
+        const text = await el.textContent().catch(() => '');
+        // Chỉ match chính xác số 1 (không phải 10, 11, 12...)
+        if (text && text.trim() === String(targetDay)) {
+          const isVisible = await el.isVisible().catch(() => false);
+          if (isVisible) {
+            await el.click();
+            logger.info('AutomationCDPService.navigateToMonthAndSelectDay: Selected day', { 
+              id, 
+              type,
+              day: targetDay 
+            });
+            return;
+          }
+        }
+      }
+      
+      logger.warn('AutomationCDPService.navigateToMonthAndSelectDay: Could not find day element', { 
+        id, 
+        type,
+        targetDay 
+      });
+    } catch (err) {
+      logger.error('AutomationCDPService.navigateToMonthAndSelectDay: Error selecting day', { 
+        id, 
+        type,
+        error: err.message 
+      });
     }
   }
 

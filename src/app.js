@@ -7,6 +7,7 @@ import automationRoutes from './routes/automation.routes.js';
 import usageAnalyticsRoutes from './routes/usage-analytics.routes.js';
 import sessionRoutes from './routes/session.routes.js';
 import syncRoutes from './routes/sync.routes.js';
+import windsurfRoutes from './routes/windsurf.routes.js';
 import logger from './utils/logger.js';
 import config from './config/index.js';
 
@@ -33,6 +34,7 @@ app.use('/api/automation', automationRoutes);
 app.use('/api/usage-analytics', usageAnalyticsRoutes);
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/sync', syncRoutes);
+app.use('/api/windsurf', windsurfRoutes);
 
 app.get('/api/health', (req, res) => {
   logger.debug('Health check');
@@ -51,8 +53,11 @@ app.get('/api/config', (req, res) => {
       paths: {
         profiles: config.paths.profiles,
         download: config.paths.download,
+        cursorDownload: config.paths.cursorDownload,
+        windsurfDownload: config.paths.windsurfDownload,
       },
       cursor: config.cursor,
+      windsurf: config.windsurf,
     }
   });
 });

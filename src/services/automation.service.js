@@ -131,7 +131,7 @@ export class AutomationService {
     let context = null;
 
     try {
-      await fs.mkdir(config.paths.download, { recursive: true });
+      await fs.mkdir(config.paths.cursorDownload, { recursive: true });
 
       context = await chromium.launchPersistentContext(fullProfilePath, {
         headless: true,
@@ -438,7 +438,7 @@ export class AutomationService {
       
       const sanitizedEmail = email.replace(/[^a-zA-Z0-9@._-]/g, '_');
       const fileName = `${sanitizedEmail}.csv`;
-      const filePath = path.join(config.paths.download, fileName);
+      const filePath = path.join(config.paths.cursorDownload, fileName);
       
       await download.saveAs(filePath);
       logger.info('AutomationService.downloadCSV: File saved', { id, filePath });

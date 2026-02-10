@@ -35,3 +35,4 @@ client/dist/
 client/node_modules/
 
 accounts.json
+windsurf-accounts.json

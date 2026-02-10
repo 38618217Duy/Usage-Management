@@ -14,9 +14,14 @@ export const config = {
   paths: {
     root: ROOT_DIR,
     profiles: path.join(ROOT_DIR, 'profiles'),
+    cursorProfiles: path.join(ROOT_DIR, 'profiles', 'cursor'),
+    windsurfProfiles: path.join(ROOT_DIR, 'profiles', 'windsurf'),
     download: path.join(ROOT_DIR, 'download'),
+    cursorDownload: path.join(ROOT_DIR, 'download', 'cursor'),
+    windsurfDownload: path.join(ROOT_DIR, 'download', 'windsurf'),
     logs: path.join(ROOT_DIR, 'logs'),
     accountsFile: path.join(ROOT_DIR, 'accounts.json'),
+    windsurfAccountsFile: path.join(ROOT_DIR, 'windsurf-accounts.json'),
   },
 
   cursor: {
@@ -48,6 +53,17 @@ export const config = {
     login: {
       loginForm: 'form[action*="login"], form[method="post"], .login-form',
       emailInput: 'input[type="email"], input[name="email"]',
+    },
+  },
+
+  windsurf: {
+    baseUrl: 'https://windsurf.com',
+    profileUrl: 'https://windsurf.com/profile',
+    usageUrl: 'https://windsurf.com/subscription/usage',
+    loginUrl: 'https://windsurf.com',
+    selectors: {
+      usageTab: 'a[href*="usage"], button:has-text("Usage"), [data-testid*="usage"]',
+      usageSection: 'main, .usage-section, [data-testid="usage"]',
     },
   },
 };
